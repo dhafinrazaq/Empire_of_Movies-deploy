@@ -112,7 +112,7 @@ DATABASES = {
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
-#  PGUSER=dhafinrazaq PGPASSWORD=123  heroku pg:push postgres://127.0.0.1/empire_of_movies postgresql-symmetrical-60973
+#  PGUSER=dhafinrazaq PGPASSWORD=123  heroku pg:push postgres://127.0.0.1/empire_of_movies postgresql-perpendicular-60239
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -150,7 +150,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'#location where django collect all static files
+STATIC_ROOT = os.path.join(BASE_DIR,'static')# location where you will store your static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'project_name/static')
+]
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
