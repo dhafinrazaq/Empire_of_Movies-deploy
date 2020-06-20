@@ -1,1 +1,1 @@
-web: gunicorn Empire_of_Movies.wsgi --log-file 
+web: gunicorn Empire_of_Movies.wsgi --log-file -
