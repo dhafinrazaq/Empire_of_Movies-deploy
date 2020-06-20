@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1 class="display-4">Empire of Movies</h1>
+  <p class="lead">The best website</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'movie_followed' %}" role="button">View Followed Movies</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'movie_list' %}" role="button">View All Movies</a>
+  </p>
+</div>
+{% endblock content %}

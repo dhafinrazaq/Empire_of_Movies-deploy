@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb"> 
+    <li class="breadcrumb-item"><a href = "{%url 'movie_list' %}"> Movies </a> </li>>
+    <li class="breadcrumb-item active"> New Movie  </li>
+  </ol>
+</nav>
+
+    <h1>New Movie</h1>
+    <form action="" method="post">{% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-success ml-2" type="submit">Save</button>
+    </form>
+{% endblock content %}

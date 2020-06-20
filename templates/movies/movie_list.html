@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Movies{% endblock title %}
+  
+{% block content %}
+<nav aria-label="breadcrumb"> 
+  <ol class="breadcrumb"> 
+    <li class="breadcrumb-item active">Movies </li>
+  </ol>
+</nav>  
+
+  <div class="dropdown dropright">
+    <button type="button" class="btn btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"> Sort by </button>
+    <div class = "dropdown-menu">
+      {% if sort_by == "alphabet" %}
+      <a class='dropdown-item active'  href="{% url 'movie_list' %}"> A-Z</a>
+      <a class='dropdown-item' href="{% url 'movie_list_latest' %}"> Latest</a>
+      {% else %}
+      <a class='dropdown-item' href="{% url 'movie_list'%}"> A-Z</a>
+      <a class='dropdown-item active'  href="{% url 'movie_list_latest'  %}"> Latest</a>
+      {% endif %}
+    </div>
+  </div>
+  <br>
+  {% for movie in movie_list %}
+    <div class="card">
+      <div class="card-header" style="overflow:hidden">
+        <div class="font-weight-bold text-black" style="float:left"><h4><a style="vertical-align:middle" href="{% url 'movie_detail' movie.pk %}" class="">{{ movie.title }}</a><span class="text-black-50">&nbsp;&middot;&nbsp;</span></h4></div> 
+        <div class="font-weight-bold text-black-50" style="float:left; vertical-align:middle"><h4><span style="vertical-align:middle">({{ movie.year }}) &nbsp;</span></h4></div>
+        <div style="float:left">
+          <form class ='form', method='POST' action = '{% url "follow" %}'> {% csrf_token %}
+                    <input type='hidden' name ='title' value='{{movie.title}}'/>
+                    {% if user in movie.all_followers %}
+                    <button class='btn btn-danger'>
+                    Unfollow
+                    </button>&ensp;
+                    {% else %}
+                    <button class='btn btn-primary'>
+                    Follow 
+                    </button>&ensp;
+                    {% endif %} 
+          </form>
+        </div>
+        <div style="float:left">
+            <form class ='form', method='GET' action = "{% url 'discussion_list' movie.pk %}">
+              <button class='btn btn-primary'>
+              Discussion
+              </button>&ensp;
+            </form>
+        </div>
+        <div style="float:left">
+          <form class ='form', method='GET' action = "{% url 'review_list' movie.pk %}">
+              <button class='btn btn-primary'>
+              Reviews
+              </button>
+          </form>
+        </div>
+      </div>
+      {% if movie.synopsis %}
+      <div class="card-body">
+        <p>{{ movie.synopsis }}</p>
+      </div>
+      {%endif%}
+    </div>
+    <br />
+  {% endfor %}
+{% endblock content %}

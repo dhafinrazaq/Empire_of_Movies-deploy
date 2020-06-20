@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load social_share %}
+
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb"> 
+    <li class="breadcrumb-item"><a href = "{%url 'movie_list' %}"> Movies  </a> </li>
+    <li class="breadcrumb-item active"> {{movie.title}}  </li>
+  </ol>
+</nav>
+<div class="article-entry">
+  <div style="overflow:hidden">
+    <div style="float:left ">
+      <h2 >{{ object.title }} &ensp; </h2> 
+    </div>
+    <div style="float:left">
+      <form class ='form', method='POST' action = '{% url "follow" %}'> {% csrf_token %}
+                <input type='hidden' name ='title' value='{{movie.title}}'/>
+                {% if is_followed %} 
+                <button class='btn btn-danger'>
+                Unfollow
+                </button>&ensp;
+                {% else %}
+                <button class='btn btn-primary'>
+                Follow 
+                </button>&ensp;
+                {% endif %} 
+      </form>
+    </div>
+    <div style="float:left">
+      <form class ='form', method='GET' action = "{% url 'discussion_list' movie.pk %}">
+                <button class='btn btn-primary'>
+                Discussion
+                </button>&ensp;
+      </form>
+    </div>
+    <div style="float:left">
+      <form class ='form', method='GET' action = "{% url 'review_list' movie.pk %}">
+                <button class='btn btn-primary'>
+                Reviews
+                </button>
+      </form>
+    </div>
+  </div>
+  <br>
+{% if object.image != "https://imdb-api.com/images/original/nopicture.jpg" %}
+  <div class="row">
+    <div class="col-sm-4" style="float:left">
+      <img class="img-fluid" style="width: 100%;" src="{{object.image}}" alt ="{{object.title}}">
+    </div>
+      <div class="col-sm-8" style="float:right">
+        <p>{{ object.synopsis }}</p>
+        {% if object.genres%}
+          <p> <strong>Genre:</strong> {{object.genres}} </p>
+        {%endif%}
+        {% if object.releaseDate%}
+          <p> <strong>Released on:</strong> {{object.releaseDate}} </p>
+        {%endif%}
+        {% if object.runtimeStr%}
+          <p> <strong>Duration:</strong> {{object.runtimeStr}}</p>
+        {%endif%}
+        {% if object.directors%}
+          <p> <strong>Directors:</strong> {{object.directors}} </p>
+        {%endif%}
+        {% if object.writers%}
+          <p> <strong>Writers:</strong> {{object.writers}}</p>
+        {%endif%}
+        {% if object.stars%}
+          <p> <strong>Starring:</strong> {{object.stars}} </p>
+        {%endif%}
+        {% if object.companies%}
+          <p> <strong>Companies:</strong> {{object.companies}}</p>
+        {%endif%}
+        {% if object.countries%}
+          <p> <strong>Countries:</strong> {{object.countries}} </p>
+        {%endif%}
+        {% if object.languages%}
+          <p> <strong>Language:</strong> {{object.languages}}</p>
+        {%endif%}
+        {% if object.contentRating%}
+          <p> <strong>Content rating:</strong> {{object.contentRating}} </p>
+        {%endif%}
+        {% if object.imDbRating%}
+          <p> <strong>imDbRating:</strong> {{object.imDbRating}}</p>
+        {%endif%}
+        {% if object.tagline%}
+          <p> <strong>Taglines:</strong> {{object.tagline}} </p>
+        {%endif%}
+        {% if object.keywords%}
+        <p> <strong>Keywords:</strong> {{object.keywords}}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% else %}
+      <div>
+        <p>{{ object.synopsis }}</p>
+        <p> <strong>Genre:</strong> {{object.genres}} </p>
+        <p> <strong>Released on:</strong> {{object.releaseDate}} </p>
+        <p> <strong>Duration:</strong> {{object.runtimeStr}}</p>
+        <p> <strong>Directors:</strong> {{object.directors}} </p>
+        <p> <strong>Writers:</strong> {{object.writers}}</p>
+        <p> <strong>Starring:</strong> {{object.stars}} </p>
+        <p> <strong>Companies:</strong> {{object.companies}}</p>
+        <p> <strong>Countries:</strong> {{object.countries}} </p>
+        <p> <strong>Language:</strong> {{object.languages}}</p>
+        <p> <strong>Content rating:</strong> {{object.contentRating}} </p>
+        <p> <strong>imDbRating:</strong> {{object.imDbRating}}</p>
+        <p> <strong>Taglines:</strong> {{object.tagline}} </p>
+        <p> <strong>Keywords:</strong> {{object.keywords}}</p>
+      </div>
+{%endif%}
+  {% post_to_telegram "Check this out!" movie.get_absolute_url post%}
+</div>
+{% endblock content %}

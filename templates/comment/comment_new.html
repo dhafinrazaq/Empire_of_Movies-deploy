@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <a href = "{%url 'movie_list' %}"> Movies </a> &gt; 
+  <a href = "{%url 'movie_detail' movie_pk%}"> {{movie_name}} </a> &gt;
+  <a href="{%url 'discussion_list' movie_pk%}"> Discussions </a> &gt;
+  <a href="{{discussion.get_absolute_url}}"> {{discussion_name}} </a>
+  <a href="#"> New Comment </a>
+
+    <h1>New Comment</h1>
+    <form action="" method="post">{% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-success ml-2" type="submit">Save</button>
+    </form>
+{% endblock content %}

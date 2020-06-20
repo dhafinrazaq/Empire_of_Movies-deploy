@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb"> 
+    <li class="breadcrumb-item"><a href = "{%url 'movie_list' %}"> Movies  </a> </li>
+    <li class="breadcrumb-item"><a href = "{%url 'movie_detail' movie_pk%}"> {{movie_name}}  </a> </li>
+    <li class="breadcrumb-item"><a href="{%url 'review_list' movie_pk%}"> Reviews  </a> </li>
+    <li class="breadcrumb-item active"> {{review_name}}</li>
+    </ol>
+  </nav>
+
+<div class="card" style="margin-top:30px">
+  <div class="card-header bg-light" style="overflow:hidden">
+      <div class="font-weight-bold" style="float:left"><h2><a style="vertical-align:top" href="#">{{ review.title }}</a></h2>
+          <h6 class="text-black">by {{ object.author }} </h6>
+          <h6 class="text-black">on {{ object.date }}</h6>
+      </div> &ensp;&ensp;
+        <div style="float:right">
+          {% if user == review.author %}
+          <div class="dropdown dropleft">
+            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'review_edit' review.movie.pk review.pk  %}">Edit</a> 
+              <a class="dropdown-item" href="{% url 'review_delete' review.movie.pk review.pk %}">Delete</a>
+            </div>
+          </div>
+        {% endif %}
+        </div>
+  </div>
+  <div class="card-body">
+  <p> <strong>Rating: </strong> {{object.rating}} </p>
+    <p>{{ object.body }}</p>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Connect to Telegram{% endblock %}
+{% block content %}
+<div class="container">
+<h1>Connect to Telegram</h1>
+<p>You will receive notifications when there is a new discussion or review for a movie you follow.</p>
+<ol>
+    <li>Add <code>EmpireOfMoviesbot</code> on Telegram</li>
+    <li>Send the command <code>/start</code></li>
+    <li>Send the command <code>/login {{user.username}} {{OTP}}</code></li>
+    <li>You should receive <cite>You are logged in </cite></li>
+</ol>
+</div>
+{% endblock content %}

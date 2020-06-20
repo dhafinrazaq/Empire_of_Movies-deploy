@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Choose the Movie{% endblock title %}
+  
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href = "{%url 'movie_request' %}">Request Movie</a></li>
+    <li class="breadcrumb-item active">Choose the Movie</li>
+  </ol>
+</nav>
+<h1> Choose the Movie  </h1>
+{% for possible_movie in possible_movies %}
+
+    <form class ='form', method='POST' action = ''> {% csrf_token %}
+                <input type='hidden' name ='id' value='{{ possible_movie.0 }}'/>
+                <button class='btn'>
+                {% if possible_movie.2 %}
+                {{ possible_movie.1|safe }} ({{ possible_movie.2 }})
+                {% else %}
+                {{ possible_movie.1|safe }} 
+                {% endif %}
+                </button>
+
+                
+                
+      </form>
+      <br>
+{% endfor %}
+
+
+{% endblock content %}

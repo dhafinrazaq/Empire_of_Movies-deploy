@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <a href = "{%url 'movie_list' %}"> Movies </a> &gt;
+  <a href = "{%url 'movie_detail' movie_pk%}"> {{movie_name}}  </a> &gt;
+  <a href="{%url 'discussion_list' movie_pk%}"> Discussions  </a> &gt;
+  <a href="{%url 'discussion_detail' movie_pk discussion_pk%}"> {{discussion_name}} </a> &gt;
+  <a href="{{comment.get_absolute_url}}"> Comment </a>
+  <a href="#"> Delete </a>
+
+    <h1>Delete Comment</h1>
+    <form action="" method="post">{% csrf_token %}
+      <p>Are you sure you want to delete "{{ comment.title }}"?</p>
+      <button class="btn btn-danger ml-2" type="submit">Confirm</button>
+    </form>
+{% endblock content %}

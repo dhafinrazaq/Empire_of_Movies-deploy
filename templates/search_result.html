@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock title %}
+{% block content %}
+<h1>Search Results</h1>
+<h2>Movie<h2>
+{% for object in movie_list %}
+<div>
+<h3><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h3>
+</div>
+{% endfor %}
+<h2>Discussion<h2>
+{% for object in discussion_list %}
+<div>
+<h3><a href="{{ object.movie.get_absolute_url }}">{{ object.movie.title }}</a>: <a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h3>
+</div>
+{% endfor %}
+<h2>Review<h2>
+{% for object in review_list %}
+<div>
+<h3><a href="{{ object.movie.get_absolute_url }}">{{ object.movie.title }}</a>: <a href="{{ object.get_absolute_url }}"> {{ object.title }}</a></h3>
+</div>
+{% endfor %}
+{% endblock content %}

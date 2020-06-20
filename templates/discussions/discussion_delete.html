@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb"> 
+    <li class="breadcrumb-item"><a href = "{%url 'movie_list' %}"> Movies </a>  </li>
+    <li class="breadcrumb-item"><a href = "{%url 'movie_detail' movie_pk%}"> {{movie_name}} </a> </li>
+    <li class="breadcrumb-item"><a href="{%url 'discussion_list' movie_pk%}"> Discussions  </a> </li>
+    <li class="breadcrumb-item"><a href="{%url 'discussion_detail' movie_pk discussion_pk%}"> {{discussion_name}}</a> </li>
+    <li class="breadcrumb-item active"> Delete </li>
+  </ol>
+</nav>
+
+    <h1>Delete Discussion</h1>
+    <form action="" method="post">{% csrf_token %}
+      <p>Are you sure you want to delete "{{ discussion.body }}"?</p>
+      <button class="btn btn-danger ml-2" type="submit">Confirm</button>
+    </form>
+{% endblock content %}

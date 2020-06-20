@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Notifications{% endblock title %}
+  
+{% block content %}
+ <form class ='form', method='POST' action = '{% url "notification_clear_all" %}'> {% csrf_token %}
+              <button class='btn btn-danger'>
+                Clear All
+              </button>
+          </form>
+  {% for notification in object_list %}
+    <p>{{notification.title}} <a href="{{ notification.movie_link }}">{{ notification.movie_title }}</a> with title <a href="{{ notification.inside_link }}">{{ notification.inside_title }}</a></p>
+    <form class ='form', method='POST' action = '{% url "notification_clear" %}'> {% csrf_token %}
+              <input type='hidden' name ='pk' value='{{ notification.pk }}'/>
+              <button class='btn btn-danger'>
+                Clear
+              </button>
+          </form>
+    <br />
+  {% endfor %}
+{% endblock content %}

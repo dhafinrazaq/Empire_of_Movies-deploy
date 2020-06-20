@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb"> 
+    <li class="breadcrumb-item"><a href = "{%url 'movie_list' %}"> Movies  </a> </li>
+    <li class="breadcrumb-item"><a href = "{%url 'movie_detail' movie_pk%}"> {{movie_name}}  </a> </li>
+    <li class="breadcrumb-item"><a href="{%url 'review_list' movie_pk%}"> Reviews  </a> </li>
+    <li class="breadcrumb-item"><a href="{%url 'review_detail' movie_pk review_pk%}"> {{review_name}}  </a> </li>
+    <li class="breadcrumb-item active"> Edit </li>
+  </ol>
+</nav>
+  
+    <h1>Edit Review</h1>
+    <form action="" method="post">{% csrf_token %}
+      {{ form.as_p }}
+    <button class="btn btn-info ml-2" type="submit">Update</button>
+</form>
+{% endblock content %}

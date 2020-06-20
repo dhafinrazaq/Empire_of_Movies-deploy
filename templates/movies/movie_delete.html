@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb"> 
+    <li class="breadcrumb-item"><a href = "{%url 'movie_list' %}"> Movies  </a> </li>
+    <li class="breadcrumb-item"><a href = "{%url 'movie_detail' movie.pk%}"> {{movie.title}}  </a> </li>
+    <li class="breadcrumb-item active">Delete  {{movie.title}}  </li>
+  </ol>
+</nav>
+    <h1>Delete Movie</h1>
+    <form action="" method="post">{% csrf_token %}
+      <p>Are you sure you want to delete "{{ movie.title }}"?</p>
+      <button class="btn btn-danger ml-2" type="submit">Confirm</button>
+    </form>
+{% endblock content %}

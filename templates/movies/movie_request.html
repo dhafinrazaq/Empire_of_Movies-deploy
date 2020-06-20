@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Movies{% endblock title %}
+  
+{% block content %}
+
+
+{% if messages %}
+  <script>
+    alert("The movie requested is not available")
+    {% for message in messages %}
+       {{ message.replied }} 
+    {% endfor %}
+  </script>
+    
+{% endif %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active"> Request Movie </li>
+  </ol>
+</nav>
+<h2>Request Movie</h2>
+
+<form action="" method="post">
+{% csrf_token %}
+  <label for="title">Title*</label><br>
+  <input class="form-control" type="text" id="title" name="title" required><br>
+  <label for="year">Year</label><br>
+  <input class="form-control" type="text" id="year" name="year"><br><br>
+  <input class="btn btn-success" type="submit" value="Submit"/>
+</form> 
+{% endblock content %}

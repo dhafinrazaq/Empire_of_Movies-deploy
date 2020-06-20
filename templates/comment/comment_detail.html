@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <a href = "{%url 'movie_list' %}"> Movies  </a> &gt;
+  <a href = "{%url 'movie_detail' movie_pk%}"> {{movie_name}}  </a> &gt;
+  <a href="{%url 'discussion_list' movie_pk%}"> Discussions  </a> &gt;
+   <a href="{{discussion.get_absolute_url}}"> {{discussion_name}} </a> &gt;
+   <a href="#"> Comment </a>
+  <br>
+  <a href="{% url 'comment_new' movie_pk discussion_pk %}"> New Comment </a>
+<div class="article-entry">
+    <h2>{{ object.title }}</h2>
+
+  </div>
+  {% if user == comment.author %}
+  <p><a href="{% url 'discussion_edit' discussion.movie.pk discussion.pk  %}">Edit</a> 
+  | <a href="{% url 'discussion_delete' discussion.movie.pk discussion.pk %}">Delete</a>
+  {% endif %}
+</p>
+  
+  <p>Back to <a href="{{discussion.get_absolute_url}}"> {{discussion_name}}</a>.</p>
+{% endblock content %}

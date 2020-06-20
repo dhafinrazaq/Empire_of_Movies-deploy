@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Discussion{% endblock title %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb"> 
+    <li class="breadcrumb-item"><a href = "{%url 'movie_list' %}"> Movies </a> </li> 
+    <li class="breadcrumb-item"><a href = "{%url 'movie_detail' movie_pk%}"> {{movie_name}} </a> </li> 
+    <li class="breadcrumb-item active"> Discussions </li>
+  </ol>
+</nav>
+  <form class ='form'  action = '{% url "discussion_new" movie_pk %}'> {% csrf_token %}
+                    <button class='btn btn-primary '>
+                    New Discussion for {{movie_name}}
+                    </button>&ensp;
+  </form>
+  <br>
+  <div class="dropdown dropright">
+    <button type="button" class="btn btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"> Sort by </button>
+    <div class = "dropdown-menu">
+      {% if sort_by == "new" %}
+      <a class='dropdown-item active'  href="{% url 'discussion_list' movie_pk %}"> New</a>
+      <a class='dropdown-item' href="{% url 'discussion_list_top' movie_pk %}"> Top</a>
+      {% else %}
+      <a class='dropdown-item' href="{% url 'discussion_list' movie_pk %}"> New</a>
+      <a class='dropdown-item active'  href="{% url 'discussion_list_top' movie_pk %}"> Top</a>
+      {% endif %}
+    </div>
+  </div>
+  <br>
+  {% for discussion in object_list %}
+    <div class="card">
+      <div class="card-header">
+        <span class="font-weight-bold"> <a href="{{ discussion.get_absolute_url }}">{{ discussion.title }}</a></span> &middot;
+        <span>{{ discussion.author }} &middot; {{ discussion.date|timesince }}</span>
+      </div>
+      <div class="card-body">
+        <p>{{ discussion.body }}</p>
+        {% if user == discussion.author%}
+        <a href="{% url 'discussion_edit' discussion.movie.pk discussion.pk %}">Edit</a> |
+        <a href="{% url 'discussion_delete' discussion.movie.pk discussion.pk %}">Delete</a>|
+        {%endif%}
+      </div>
+    </div>
+    <br />
+  {% endfor %}
+{% endblock content %}
