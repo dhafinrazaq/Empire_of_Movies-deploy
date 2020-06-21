@@ -10,13 +10,11 @@
     <li class="breadcrumb-item active"> Review </li>
   </ol>
 </nav>
-  <br>
   <form class ='form'  action = '{% url "review_new" movie_pk %}'> {% csrf_token %}
                     <button class='btn btn-primary'>
                     New Review for {{movie_name}}
                     </button>&ensp;
   </form>
-  <br>
   <br>
   {% for discussion in object_list %}
     <div class="card">

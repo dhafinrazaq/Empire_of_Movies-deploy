@@ -3,6 +3,11 @@
 {% block title %}Notifications{% endblock title %}
   
 {% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active">Notifications</li>
+  </ol>
+</nav>
  <form class ='form', method='POST' action = '{% url "notification_clear_all" %}'> {% csrf_token %}
               <button class='btn btn-danger'>
                 Clear All
