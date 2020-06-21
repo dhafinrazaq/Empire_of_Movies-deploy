@@ -59,19 +59,11 @@ class MovieRequestView(LoginRequiredMixin, TemplateView):
         if (request.POST.get('year')):
             year = request.POST.get('year')
             possible_movies = get_possible_movies(title, year)
-            if (possible_movies):
-                return redirect(reverse('movie_request_list_year', args=[title, year]))
-            else:
-                messages.success(request, 'Movie request failed')
-                return redirect(reverse("movie_request"))
+            return redirect(reverse('movie_request_list_year', args=[title, year]))
         else:
             year = ""
             possible_movies = get_possible_movies(title, year)
-            if (possible_movies):
-                return redirect(reverse('movie_request_list', args=[title]))
-            else: 
-                messages.success(request, 'Movie request failed')
-                return redirect(reverse("movie_request")) 
+            return redirect(reverse('movie_request_list', args=[title]))
 
 class MovieRequestListView(LoginRequiredMixin, TemplateView):
     template_name = 'movies/movie_request_list.html'
