@@ -257,7 +257,7 @@ class DiscussionCreateView(LoginRequiredMixin, CreateView):
             if (notification not in follower.notifications.all()):
                 follower.notifications.add(notification)
             if (follower.chat_id):
-                telegram_bot_sendtext(follower.chat_id, "New discussion for " + notification.movie_title + " with title " + notification.inside_title, "127.0.0.1:8000" + notification.inside_link)
+                telegram_bot_sendtext(follower.chat_id, "New discussion for " + notification.movie_title + " with title " + notification.inside_title, "empire-of-movies.herokuapp.com" + notification.inside_link)
         
         return redirect(self.object)
 
@@ -409,7 +409,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
             if (notification not in follower.notifications.all()):
                 follower.notifications.add(notification)
             if (follower.chat_id):
-                telegram_bot_sendtext(follower.chat_id, "New review for " + notification.movie_title + " with title " + notification.inside_title, "127.0.0.1:8000" + notification.inside_link)
+                telegram_bot_sendtext(follower.chat_id, "New review for " + notification.movie_title + " with title " + notification.inside_title, "empire-of-movies.herokuapp.com0" + notification.inside_link)
         
         return redirect(self.object)
 
