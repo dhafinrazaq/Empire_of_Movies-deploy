@@ -1,13 +1,23 @@
 <!-- templates/registration/login.html -->
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
 {% block title %}Log In{% endblock title %}
 {% block content %}
 <h2>Log In</h2>
 <form method="post">
 {% csrf_token %}
-{{ form.as_p }}
+{{ form|crispy }}
 <button class="btn btn-success ml-2" type="submit">Log In</button>
-<a href="/accounts/google/login">Google</a>
-<a href="/accounts/facebook/login">Facebook</a>
+<hr>
+<h4>Or Login with:</h4>
+
+<a class="btn btn-outline-dark" href="/accounts/google/login" role="button" style="text-transform:none">
+      <img width="25px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+      Login with Google
+    </a>
+
+  <a href="/accounts/facebook/login" class="fb connect">Sign in with Facebook</a>
+
 </form>
 {% endblock content %}
