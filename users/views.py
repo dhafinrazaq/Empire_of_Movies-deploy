@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, View
 from .forms import CustomUserCreationForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -33,3 +33,6 @@ class TelegramOTPView(LoginRequiredMixin, TemplateView):
         self.request.user.save()
         context['OTP'] = self.request.user.OTP
         return context
+
+# class SocialLoginView(View):
+#     pass

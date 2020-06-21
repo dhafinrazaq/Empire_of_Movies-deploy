@@ -7,5 +7,7 @@
 {% csrf_token %}
 {{ form.as_p }}
 <button class="btn btn-success ml-2" type="submit">Log In</button>
+<a href="/accounts/google/login">Google</a>
+<a href="/accounts/facebook/login">Facebook</a>
 </form>
 {% endblock content %}
