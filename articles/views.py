@@ -388,12 +388,17 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         context['movie_pk'] = self.kwargs.get('movie_pk')
         return context
 
+    def get_form(self, form_class=None):
+        form = super(ReviewCreateView, self).get_form(form_class)
+        form.fields['title'].required = True
+        return form
+
     def post(self, request, *args, **kwargs):
         #print(request.POST)
         super().post(request, *args, **kwargs)
         current_movie = Movie.objects.get(pk=self.kwargs.get('movie_pk'))
         all_followers = current_movie.all_followers()
-        title = "New Discussion for"
+        title = "New Review for"
         print(self.object.get_absolute_url())
         notification = Notification.create(title=title, movie=current_movie, inside=self.object)
         notification.save()

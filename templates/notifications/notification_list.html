@@ -14,7 +14,11 @@
               </button>
           </form>
   {% for notification in object_list %}
+  {% if notification.movie_title %}
     <p>{{notification.title}} <a href="{{ notification.movie_link }}">{{ notification.movie_title }}</a> with title <a href="{{ notification.inside_link }}">{{ notification.inside_title }}</a></p>
+  {% else %}
+    <p>{{notification.title}}</p>
+  {% endif %}
     <form class ='form', method='POST' action = '{% url "notification_clear" %}'> {% csrf_token %}
               <input type='hidden' name ='pk' value='{{ notification.pk }}'/>
               <button class='btn btn-danger'>

@@ -6,6 +6,7 @@ from articles.models import Discussion, Review, Comment
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from notifications.models import Notification
 
 class ReportFormView(LoginRequiredMixin, TemplateView):
     model = Report
@@ -29,4 +30,8 @@ class ReportFormView(LoginRequiredMixin, TemplateView):
             comment = Comment.objects.get(pk=request.POST.get('comment_id'))
         report = Report.create(reported, reporter, short_reason, long_reason, discussion, review, comment)
         report.save()
+        if (reported.reported.all().count() % 5 == 0):
+            notification = Notification.create_title('Your account have been suspected for inappropriate behaviour')
+            notification.save()
+            reported.notifications.add(notification)
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))

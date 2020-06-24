@@ -10,13 +10,14 @@
   </ol>
 </nav>
   <br>
+
 <div class="article-entry">
     <div style="overflow:hidden">
       <h2 style="float:left">{{ object.title }}&ensp;</h2> 
       <div style="float:left">
         <!-- Report start -->
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#report">Report</button>
-        <div class="modal" id="report">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#report_discussion">Report</button>
+        <div class="modal" id="report_discussion">
           <div class="modal-dialog">
             <div class="modal-content">
             <!-- Modal Header -->
@@ -95,29 +96,66 @@
 </form>
 <br><br>
   {% for comment in comment_list %}
+                     <div class="modal" id="report">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                        <!-- Modal Header -->
+                          <div class="modal-header">
+                            <div class="col-11">
+                              <h4 class="modal-title text-center">Report</h4>
+                            </div>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <!-- Modal body -->
+                          <div class="modal-body">
+                            <form class ='form', method='POST' action = '{% url "report" %}'> {% csrf_token %}
+                              <input type='hidden' name ='comment_id' value='{{comment.id}}'/>
+                              <input type='hidden' name ='reported_id' value='{{comment.author.id}}'/>
+                              <!--<input name="short_reason" class="form-control mr-sm-2" type="text" placeholder="Short Reason" aria-label="Short Reason"> -->
+                              <select class="form-control" name="short_reason">
+                                <option value="" disabled selected>Select your option</option>
+                                <option value="spam">It's a spam</option>
+                                <option value="inappropriate">It's inappropriate</option>
+                              </select>
+                              <br>
+                              <input name="long_reason" class="form-control mr-sm-2" type="text" placeholder="More Detail" aria-label="More Detail">
+                              <br>
+                              <button class="btn btn-danger" style="float:right" type="submit" value="Submit"> Report   </button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
     <div class="card">
       <div class="card-header">
-        <div class="row">
+        
           <div>
-            <span class="align-items-center"> {{ comment.title }}</span>
+            <span> {{ comment.title }}</span>
           </div>
-        </div>
       </div>
       <div class="card-footer">
         <div class="row">
           <div class="col">
-              {% if user == comment.author %}
               <div class="dropdown dropright">
                 <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"></button>
+                  
                   <div class="dropdown-menu">
+                  {% if user == comment.author %}
                     <a class="dropdown-item" href="{% url 'comment_edit' comment.discussion.movie.pk comment.discussion.pk comment.pk  %}">Edit</a> 
                     <a class="dropdown-item" href="{% url 'comment_delete' comment.discussion.movie.pk comment.discussion.pk comment.pk %}">Delete</a>
+                  {% endif %}
+                    <!-- Report start -->
+                     <a class="dropdown-item" data-toggle="modal" data-target="#report">Report</a>
+                  
                   </div>
               </div>
-              {% endif %}
+              
           </div>
-          <div class="col-auto">
-            <div class="">{{ comment.author }} &middot; {{ comment.date|timesince }}</div>
+          <div class="col-auto row align-items-center mr-1">
+            <div class="align-self-center">
+              <span>{{ comment.author }} &middot; {{ comment.date|timesince }}</span>
+            </div>
           </div>
         </div>
       </div>
