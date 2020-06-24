@@ -2,6 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib.auth.admin import UserAdmin
+from django.db.models import Count
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
@@ -34,10 +35,20 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display=['email', 'username','is_staff', 'telegram_id',]
+
+    def get_queryset(self, request):
+        qs = super(CustomUserAdmin, self).get_queryset(request)
+        return qs.annotate(report_count=Count('reported'))
+
+    def report_count(self, inst):
+        return inst.report_count
+
+    report_count.admin_order_field = 'report_count'
+
+    list_display=['email', 'username','is_staff', 'telegram_id', 'report_count',]
     fieldsets = (
         (None, {
-            'fields': ('username', 'email', 'telegram_id')
+            'fields': ('username', 'email', 'telegram_id',)
         }),
         )
     inlines = [
