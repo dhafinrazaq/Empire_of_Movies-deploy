@@ -5,8 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -19,17 +20,40 @@
     {% if user.is_authenticated %}
       <form class="form-inline" action="{% url 'search_results' %}" method="get">
                     <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                      
-                          <select name="filter" class="selectpicker" multiple placeholder="Filter By:">
-                            <option value="user_search">User</option>
-                            <option value="title">Title</option>
-                            <option value="year">Year</option>
-                            <option value="synopsis">Synopsis</option>
-                            <option value="stars">Stars</option>
-                            <option value="genres">Genre</option>
-                            <option value="keywords">Keywords</option>
-                          </select>
-                      
+                      <div class ="dropdown dropright">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Filter by </button>
+                        <div class ="dropdown-menu" >
+                          <div class="dropdown-item" style="display:inline-block">
+                            <input style="float:left bottom:0" type="checkbox" id="user_search" name="user_search" value="True" checked> 
+                            <span  style="float:center bottom:0"> User </span> 
+                          </div>
+                          <div class="dropdown-divider"></div>
+                          <div class="dropdown-item" style="display:inline-block">
+                            <input style="float:left bottom:0" type="checkbox" name="title" value="True" checked> 
+                            <span style="float:center bottom:0"> Title </span> 
+                          </div>
+                          <div class ="dropdown-item" style="display:inline-block">
+                            <input style="float:left bottom:0" type="checkbox" name="year" value="True" checked>
+                            <span style="float:center bottom:0" for="year">Year</span>
+                          </div>
+                          <div class ="dropdown-item" style="display:inline-block">
+                            <input style="float:left bottom:0"type="checkbox" name="synopsis" value="True" checked>
+                            <span style="float:center bottom:0"for="synopsis">Synopsis</span>
+                          </div>
+                          <div class ="dropdown-item" style="display:inline-block">
+                            <input style="float:left bottom:0"type="checkbox" name="stars" value="True" checked>
+                            <span style="float:center bottom:0"for="stars"> Star</span>
+                          </div>
+                          <div class ="dropdown-item" style="display:inline-block">
+                            <input style="float:left bottom:0"type="checkbox" name="genre" value="True" checked>
+                            <span style="float:center bottom:0"for="genre">Genre</span>
+                          </div>
+                          <div class ="dropdown-item" style="display:inline-block">
+                            <input style="float:left bottom:0"type="checkbox" name="keywords" value="True" checked>
+                            <span style="float:center bottom:0"for="keywords">Keywords</span>
+                          </div>
+                        </div>
+                      </div>
       </form>
       <ul class="navbar-nav mx-auto">
         <li class="nav-item"><a class="nav-link" href="{% url 'movie_followed' %}">Followed Movies</a></li>
@@ -70,12 +94,6 @@
       {% endblock content %}
     </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-  
 </body>
 </html>
 

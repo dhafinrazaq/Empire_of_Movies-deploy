@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+{% block content %}
+<div class="container">
+<h2>{{user_view}}'s Profile</h2>
+<ul class="pagination">
+  <li class="page-item"><a href="{% url 'profile_following' user_view.username %}" class="page-link">Following</a></li>
+  <li class="page-item"><a href="{% url 'profile_discussion' user_view.username %}" class="page-link">Discussions</a></li>
+  <li class="page-item active" ><a href="{% url 'profile_review' user_view.username %}" class="page-link">Reviews</a></li>
+  <li class="page-item"><a href="{% url 'profile_comment' user_view.username %}" class="page-link">Comments</a></li>
+</ul> 
+
+<ul class="list-group">
+{% for review in reviews %}
+<li class="list-group-item"><a class="text-dark" href="{{ review.get_absolute_url }}"><strong>{{review.title}}</strong></a> &middot; <a class="text-dark" href="{{ review.movie.get_absolute_url }}">{{review.movie.title}}</a></li>
+{% endfor %}
+</ul>
+</div>
+{% endblock content %}
