@@ -51,7 +51,7 @@
       </div>
       
     </div>
-    <p class="text-secondary">by {{ object.author }}  &middot; {{ object.date|timesince }} ago</p>
+    <p class="text-secondary">by <a href="{{ object.author.get_absolute_url }}">{{ object.author }}</a>  &middot; {{ object.date|timesince }} ago</p>
     <p>{{ object.body }}</p>
 
   <form class ='form', method='POST' action = '{% url "upvote_discussion" %}'> {% csrf_token %}
@@ -154,7 +154,7 @@
           </div>
           <div class="col-auto row align-items-center mr-1">
             <div class="align-self-center">
-              <span>{{ comment.author }} &middot; {{ comment.date|timesince }}</span>
+              <span><a href="{{ comment.author.get_absolute_url }}">{{ comment.author }}</a> &middot; {{ comment.date|timesince }}</span>
             </div>
           </div>
         </div>

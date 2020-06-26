@@ -35,20 +35,48 @@ class TelegramOTPView(LoginRequiredMixin, TemplateView):
         context['OTP'] = self.request.user.OTP
         return context
 
-class ProfileView(LoginRequiredMixin, TemplateView):
-    template_name = 'account/profile_view.html'
+class ProfileFollowingView(LoginRequiredMixin, TemplateView):
+    template_name = 'account/profile_view_following.html'
     login_url = 'account_login'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print("kwargs======" + str(self.kwargs))
         User = get_user_model()
-        context['user'] = User.objects.get(username=self.kwargs.get('username'))
-        context['discussions'] = Discussion.objects.filter(author=context['user'])
-        context['reviews'] = Review.objects.filter(author=context['user'])
-        context['comments'] = Comment.objects.filter(author=context['user'])
-        context['following'] = context['user'].follows
+        context['user_view'] = User.objects.get(username=self.kwargs.get('username'))
+        context['following'] = context['user_view'].follows.all()
         return context
 
-# class SocialLoginView(View):
-#     pass
+class ProfileDiscussionView(LoginRequiredMixin, TemplateView):
+    template_name = 'account/profile_view_discussion.html'
+    login_url = 'account_login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        User = get_user_model()
+        context['user_view'] = User.objects.get(username=self.kwargs.get('username'))
+        context['discussions'] = Discussion.objects.filter(author=context['user_view'])
+        return context
+
+class ProfileReviewView(LoginRequiredMixin, TemplateView):
+    template_name = 'account/profile_view_review.html'
+    login_url = 'account_login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        User = get_user_model()
+        context['user_view'] = User.objects.get(username=self.kwargs.get('username'))
+        context['reviews'] = Review.objects.filter(author=context['user_view'])
+        return context
+
+class ProfileCommentView(LoginRequiredMixin, TemplateView):
+    template_name = 'account/profile_view_comment.html'
+    login_url = 'account_login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        User = get_user_model()
+        context['user_view'] = User.objects.get(username=self.kwargs.get('username'))
+        context['comments'] = Comment.objects.filter(author=context['user_view'])
+        return context
+
+
