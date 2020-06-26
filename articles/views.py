@@ -11,6 +11,7 @@ from notifications.models import Notification
 from bot import telegram_bot_sendtext
 from django.contrib import messages
 from api import get_possible_movies
+import json
 
 class SearchResultsListView(LoginRequiredMixin, TemplateView):
     template_name = 'search_result.html'
@@ -20,21 +21,32 @@ class SearchResultsListView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get('q')
 
-        queryset = Movie.objects.none()
-        if(self.request.GET.get("title")!= None):
-            queryset |= Movie.objects.filter(Q(title__icontains=query))
-        if(self.request.GET.get("year") !=None):
-            queryset |= Movie.objects.filter(Q(year__icontains=query))
-        if(self.request.GET.get("synopsis") !=None):
-            queryset |= Movie.objects.filter(Q(synopsis__icontains=query))
-        if(self.request.GET.get("stars") !=None):
-            queryset |= Movie.objects.filter(Q(stars__icontains=query))
-        if(self.request.GET.get("genre") !=None):
-            queryset |= Movie.objects.filter(Q(genres__icontains=query))
-        if(self.request.GET.get("keywords") !=None):
-            queryset |= Movie.objects.filter(Q(keywords__icontains=query))
+        User = get_user_model()
+        
+        queryset_movie = Movie.objects.none()
+        queryset_user = User.objects.none()
+        strGET = str(self.request.GET)
+        
+        print('user_search' in strGET)
+        if('title' in strGET):
+            queryset_movie |= Movie.objects.filter(Q(title__icontains=query))
+        if('year' in strGET):
+            queryset_movie |= Movie.objects.filter(Q(year__icontains=query))
+        if('synopsis' in strGET):
+            queryset_movie |= Movie.objects.filter(Q(synopsis__icontains=query))
+        if('stars' in strGET):
+            queryset_movie |= Movie.objects.filter(Q(stars__icontains=query))
+        if('genres' in strGET):
+            queryset_movie |= Movie.objects.filter(Q(genres__icontains=query))
+        if('keywords' in strGET):
+            queryset_movie |= Movie.objects.filter(Q(keywords__icontains=query))
+        
+        if('user_search' in strGET):
+            queryset_user |= get_user_model().objects.filter(Q(username__icontains=query))
 
-        context['movie_list'] = queryset
+        
+        context['user_list'] = queryset_user
+        context['movie_list'] = queryset_movie
         context['discussion_list'] = Discussion.objects.filter(Q(title__icontains=query) | Q(body__icontains=query) | Q(author__username__icontains=query))
         context['review_list'] = Review.objects.filter(Q(title__icontains=query) | Q(body__icontains=query) | Q(author__username__icontains=query))
         return context

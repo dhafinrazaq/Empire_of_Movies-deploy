@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.postgres.fields import ArrayField
 import hashlib
+from django.urls import reverse
 
 # Create your models here.
 class CustomUser(AbstractUser):
@@ -18,3 +19,6 @@ class CustomUser(AbstractUser):
 
     def have_notification(self):
         return self.notifications.all().count() > 0
+
+    def get_absolute_url(self):
+        return reverse('profile_following', args=[str(self.username)])

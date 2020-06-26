@@ -1,23 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}Search{% endblock title %}
 {% block content %}
-<h1>Search Results</h1>
-<h2>Movie<h2>
-{% for object in movie_list %}
-<div>
-<h3><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h3>
+<div class="container">
+    <h1>Search Results</h1>
+
+    <h2>User</h2>
+    <ul>
+        {% for user in user_list %}
+        <li><a href="{{ user.get_absolute_url }}">{{user.username}}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Movie</h2>
+    <ul>
+        {% for object in movie_list %}
+        <li><a href="{{ object.get_absolute_url }}">{{object.title}}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Discussion</h2>
+    <ul>
+        {% for object in discussion_list %}
+        <li><a href="{{ object.movie.get_absolute_url }}">{{object.movie.title}}</a>: <a href="{{ object.get_absolute_url }}"> {{ object.title }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Review</h2>
+    <ul>
+        {% for object in review_list %}
+        <li><a href="{{ object.movie.get_absolute_url }}">{{object.movie.title}}</a>: <a href="{{ object.get_absolute_url }}"> {{ object.title }}</a></li>
+        {% endfor %}
+    </ul>
 </div>
-{% endfor %}
-<h2>Discussion<h2>
-{% for object in discussion_list %}
-<div>
-<h3><a href="{{ object.movie.get_absolute_url }}">{{ object.movie.title }}</a>: <a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h3>
-</div>
-{% endfor %}
-<h2>Review<h2>
-{% for object in review_list %}
-<div>
-<h3><a href="{{ object.movie.get_absolute_url }}">{{ object.movie.title }}</a>: <a href="{{ object.get_absolute_url }}"> {{ object.title }}</a></h3>
-</div>
-{% endfor %}
 {% endblock content %}

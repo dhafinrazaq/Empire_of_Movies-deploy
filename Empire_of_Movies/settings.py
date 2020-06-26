@@ -93,13 +93,13 @@ DATABASES = {
     #     'PORT': '5432',
     # }
 
-        # 'default': {
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'empire2',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'gilbert19',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '5432',
+    #     'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'empire2',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'gilbert19',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '5432',
     # }
     
 
