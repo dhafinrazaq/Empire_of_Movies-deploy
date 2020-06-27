@@ -14,7 +14,8 @@ updater = Updater(token='923537632:AAEIynJFgLCT25cbuwiuKlNPyk651kxS-LM', use_con
 dispatcher = updater.dispatcher
 
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Hi! Welcome to Empire of Movies! If you want to link with your account, \
+    please follow the instruction on the website!")
 
 def echo(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='This is not recognized')
@@ -37,6 +38,18 @@ def login(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text=str(real_otp) + " " + str(entered_otp))
     else:
         context.bot.send_message(chat_id=update.effective_chat.id, text="You entered a wrong username")
+
+def logout(update, context):
+    telegram_id = update.message.chat.username
+    if (CustomUser.objects.get(telegram_id=telegram_id)):
+        user = CustomUser.objects.get(telegram_id=telegram_id)
+        user.telegram_id = None
+        user.chat_id = None
+        user.save()
+        context.bot.send_message(chat_id=update.effective_chat.id, text="You are logged out")
+    else:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="You are not logged in")
+
 
 def unknown(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand that command.")
@@ -62,6 +75,9 @@ dispatcher.add_handler(echo_handler)
 
 login_handler = CommandHandler('login', login)
 dispatcher.add_handler(login_handler)
+
+logout_handler = CommandHandler('logout', logout)
+dispatcher.add_handler(logout_handler)
 
 unknown_handler = MessageHandler(Filters.command, unknown)
 dispatcher.add_handler(unknown_handler)
