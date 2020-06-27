@@ -42,8 +42,8 @@ def login(update, context):
 def logout(update, context):
     telegram_id = update.message.chat.username
     if (CustomUser.objects.get(telegram_id=telegram_id)):
-        print("chat before id======" + str(user.chat_id))
         user = CustomUser.objects.get(telegram_id=telegram_id)
+        print("chat before id======" + str(user.chat_id))
         user.telegram_id = None
         user.chat_id = None
         user.save()
