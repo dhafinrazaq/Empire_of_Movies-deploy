@@ -1,25 +1,20 @@
-{% extends 'base.html' %}
 
-{% block title %}Notifications{% endblock title %}
-  
-{% block content %}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active">Notifications</li>
-  </ol>
-</nav>
+
+
  <form class ='form', method='POST' action = '{% url "notification_clear_all" %}'> {% csrf_token %}
               <button class='btn btn-danger'>
                 Clear All
               </button>
-          </form>
+          </form> 
+   {% if object_list %}   
+   <p class="dropdown-item">have notif</p>    
   {% for notification in object_list %}
   {% if notification.movie_title %}
-    <p>{{notification.title}} <a href="{{ notification.movie_link }}">{{ notification.movie_title }}</a> with title <a href="{{ notification.inside_link }}">{{ notification.inside_title }}</a></p>
+    <p class="dropdown-item">{{notification.title}} <a href="{{ notification.movie_link }}">{{ notification.movie_title }}</a> with title <a href="{{ notification.inside_link }}">{{ notification.inside_title }}</a></p>
   {% else %}
-    <p>{{notification.title}}</p>
+    <p class="dropdown-item">{{notification.title}}</p>
   {% endif %}
-    <form class ='form', method='POST' action = '{% url "notification_clear" %}'> {% csrf_token %}
+   <form class ='form', method='POST' action = '{% url "notification_clear" %}'> {% csrf_token %}
               <input type='hidden' name ='pk' value='{{ notification.pk }}'/>
               <button class='btn btn-danger'>
                 Clear
@@ -27,4 +22,6 @@
           </form>
     <br />
   {% endfor %}
-{% endblock content %}
+  {% else %}
+  <p class="dropdown-item">dont have</p>    
+  {% endif %}
