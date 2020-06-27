@@ -2,22 +2,31 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Log In{% endblock title %}
+{% block title %}Login{% endblock title %}
 {% block content %}
-<h2>Log In</h2>
+<h2>Login</h2>
 <form method="post">
 {% csrf_token %}
 {{ form|crispy }}
 <button class="btn btn-success ml-2" type="submit">Log In</button>
+</form>
 <hr>
 <h4>Or Login with:</h4>
 
-<a class="btn btn-outline-dark" href="/accounts/google/login" role="button" style="text-transform:none">
-      <img width="25px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-      Login with Google
+
+<div class="row">
+&ensp;&ensp;
+  <a class="btn btn-outline-dark" href="/accounts/google/login" role="button" style="text-transform:none" href="/accounts/google/login">
+        <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+        Log in With Google
+      </a> &ensp;
+    <a href="/accounts/facebook/login">
+  <div class="fb-login-button" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
     </a>
+</div>
 
-  <a href="/accounts/facebook/login" class="fb connect">Login with Facebook</a>
 
-</form>
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=700840290753086&autoLogAppEvents=1" nonce="j8ArlxWW"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 {% endblock content %}

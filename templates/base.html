@@ -4,8 +4,37 @@
   <title>{% block title %}Empire of Movies{% endblock title %}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  .google-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+  }
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 100px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-google {
+  background: #4285f4;
+  color: white;
+}
+</style>
+
 
 </head>
 <body>
@@ -19,15 +48,14 @@
     {% if user.is_authenticated %}
       <form class="form-inline" action="{% url 'search_results' %}" method="get">
                     <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                      
                           <select name="filter" class="selectpicker" multiple placeholder="Filter By:">
-                            <option value="user_search">User</option>
-                            <option value="title">Title</option>
-                            <option value="year">Year</option>
-                            <option value="synopsis">Synopsis</option>
-                            <option value="stars">Stars</option>
-                            <option value="genres">Genre</option>
-                            <option value="keywords">Keywords</option>
+                            <option value="user_search" selected>User</option>
+                            <option value="title" selected>Title</option>
+                            <option value="year" selected>Year</option>
+                            <option value="synopsis" selected>Synopsis</option>
+                            <option value="stars" selected>Stars</option>
+                            <option value="genres" selected>Genre</option>
+                            <option value="keywords" selected>Keywords</option>
                           </select>
                       
       </form>
@@ -56,9 +84,9 @@
     {% else %}
       <ul class="navbar-nav ml-auto">
         
-        <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}"><span class="glyphicon glyphicon-log-in"></span>Log in</a></li>
+        <li class="nav-item"><a class="btn btn-outline-secondary" href="{% url 'account_login' %}"><span class="glyphicon glyphicon-log-in"></span>Log in</a></li>
         
-        <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}"><span class="glyphicon glyphicon-user"></span>Sign up</a> </li>
+        <li class="nav-item"><a class="btn btn-primary ml-2" href="{% url 'account_signup' %}"><span class="glyphicon glyphicon-user"></span>Sign up</a> </li>
       </ul>
     {% endif %}
   </div>  
@@ -69,12 +97,14 @@
       {% block content %}
       {% endblock content %}
     </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  {% comment %} <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script> {% endcomment %}
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+} <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> 
   
 </body>
 </html>
