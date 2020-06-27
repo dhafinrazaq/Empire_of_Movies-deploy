@@ -14,7 +14,7 @@ updater = Updater(token='923537632:AAEIynJFgLCT25cbuwiuKlNPyk651kxS-LM', use_con
 dispatcher = updater.dispatcher
 
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Hi! Welcome to Empire of Movies! If you want to link with your account, \
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Hi! Welcome to Empire of Movies! If you want to link with your account,\
     please follow the instruction on the website!")
 
 def echo(update, context):
@@ -42,12 +42,15 @@ def login(update, context):
 def logout(update, context):
     telegram_id = update.message.chat.username
     if (CustomUser.objects.get(telegram_id=telegram_id)):
+        print("chat before id======" + str(user.chat_id))
         user = CustomUser.objects.get(telegram_id=telegram_id)
         user.telegram_id = None
         user.chat_id = None
         user.save()
+        print("update id======" + str(update.effective_chat.id))
         context.bot.send_message(chat_id=update.effective_chat.id, text="You are logged out")
     else:
+        print("else======")
         context.bot.send_message(chat_id=update.effective_chat.id, text="You are not logged in")
 
 
