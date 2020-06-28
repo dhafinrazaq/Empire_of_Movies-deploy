@@ -20,5 +20,8 @@ class CustomUser(AbstractUser):
     def have_notification(self):
         return self.notifications.all().count() > 0
 
+    def all_notification(self):
+        return self.notifications.all()
+
     def get_absolute_url(self):
         return reverse('profile_following', args=[str(self.username)])

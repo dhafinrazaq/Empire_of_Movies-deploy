@@ -14,19 +14,17 @@
 <h4>Or Login with:</h4>
 
 
-<div class="row">
-&ensp;&ensp;
-  <a class="btn btn-outline-dark" href="/accounts/google/login" role="button" style="text-transform:none" href="/accounts/google/login">
-        <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-        Log in With Google
-      </a> &ensp;
-    <a href="/accounts/facebook/login">
-  <div class="fb-login-button" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
-    </a>
-</div>
+
+  <a class="btn btn-outline-dark" href="/accounts/google/login" role="button" style="text-transform:none">
+        <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png">
+        Log in with Google
+      </a>  
+    <a class="btn text-white" style="background-color: #1977f3" href="/accounts/facebook/login" role="button" style="text-transform:none">
+        <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg">
+        Log in with Facebook
+      </a>
 
 
 
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=700840290753086&autoLogAppEvents=1" nonce="j8ArlxWW"></script>
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
 {% endblock content %}

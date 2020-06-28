@@ -15,30 +15,33 @@
     width: 18px;
     height: 18px;
   }
-.fa {
-  padding: 20px;
-  font-size: 30px;
-  width: 100px;
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 2px;
-}
+  .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 100px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+  }
 
-.fa-facebook {
-  background: #3B5998;
-  color: white;
-}
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
 
-.fa-google {
-  background: #4285f4;
-  color: white;
-}
+  .fa-google {
+    background: #4285f4;
+    color: white;
+  }
+
+  .container {padding:20px;}
+  .form-control {width:120px;}
+  .popover {max-width:400px;}
 </style>
 
 
 </head>
 <body>
-
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
   <a class="navbar-brand" href="{% url 'home' %}">Empire of Movies</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -66,9 +69,48 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         {% if user.have_notification %}
-          <li class="nav-item"><a class="nav-link text-danger" href="{% url 'notification_list' %}">Notifications</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications</a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-item">
+                <form class ='form', method='POST' action = '{% url "notification_clear_all" %}'> {% csrf_token %}
+                    <button class='btn btn-danger'>
+                      Clear All
+                    </button>
+                </form> 
+              </div>
+              {% for notification in user.all_notification %}
+                
+                <div class="dropdown-item d-flex flex-row">
+                
+                  {% if notification.movie_title %}
+                  
+                    <div class="p-2">{{notification.title}} <a href="{{ notification.movie_link }}">{{ notification.movie_title }}</a> with title <a href="{{ notification.inside_link }}">{{ notification.inside_title }}</a></div>
+                    
+                  {% else %}
+                    <div class="p-2">{{notification.title}}</div>
+                  {% endif %}
+                  <div>
+                  <form class ='form', method='POST' action = '{% url "notification_clear" %}'> {% csrf_token %}
+                                <input type='hidden' name ='pk' value='{{ notification.pk }}'/>
+                                <button class='btn p-2'>
+                                  <span class="close">&times;</span>
+                                </button>
+                    </form>
+                  </div>
+                  
+                </div>
+              {% endfor %}
+            </div>
+          </li>
         {% else %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'notification_list' %}">Notifications</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications</a>
+              <div class="dropdown-menu dropdown-menu-right">
+                  <p class="dropdown-item disabled">You have no notification</p>
+                </div>
+          </li>
+              
         {% endif %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.username}}</a>
@@ -97,6 +139,8 @@
       {% block content %}
       {% endblock content %}
     </div>
+
+    
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
 
@@ -104,8 +148,7 @@
 
   {% comment %} <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script> {% endcomment %}
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-} <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> 
-  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> 
 </body>
 </html>
 
