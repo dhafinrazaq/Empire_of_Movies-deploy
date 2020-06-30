@@ -45,7 +45,7 @@ class CustomUserAdmin(UserAdmin):
 
     report_count.admin_order_field = 'report_count'
 
-    list_display=['email', 'username','is_staff', 'telegram_id', 'report_count',]
+    list_display=['email', 'username','is_staff', 'telegram_id', 'report_count','is_verified',]
     fieldsets = (
         (None, {
             'fields': ('username', 'email', 'telegram_id',)

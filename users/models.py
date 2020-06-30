@@ -13,12 +13,16 @@ class CustomUser(AbstractUser):
     downvotes_discussion = models.ManyToManyField('articles.Discussion', related_name='discussion_downvoter', blank=True)
     notifications = models.ManyToManyField('notifications.Notification', related_name='notified', blank=True)
     OTP = models.IntegerField(null=True, blank=True)
+    is_verified = models.BooleanField(default=False)
     
     def hash(self):
         return int(hashlib.sha256(self.username.encode('utf-8')).hexdigest(), 16) % 10**8
 
     def have_notification(self):
         return self.notifications.all().count() > 0
+
+    def all_notification(self):
+        return self.notifications.all()
 
     def get_absolute_url(self):
         return reverse('profile_following', args=[str(self.username)])

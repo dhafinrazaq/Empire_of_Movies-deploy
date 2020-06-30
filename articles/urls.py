@@ -3,7 +3,7 @@ from .views import MovieFollowedTitleView, MovieFollowedLatestView, MovieListLat
 from .views import DiscussionDetailView, DiscussionEditView, DiscussionDeleteView, DiscussionCreateView, DiscussionListViewNew, DiscussionListViewTop
 from .views import ReviewDetailView, ReviewEditView, ReviewDeleteView, ReviewCreateView, ReviewListView
 from .views import FollowMovieView, UpvoteDiscussionView, DownvoteDiscussionView
-from .views import SearchResultsListView
+from .views import SearchResultsListView, DiscussionListViewTrending
 from .views import CommentDetailView, CommentCreateView, CommentDeleteView, CommentEditView
 
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('<int:pk>/', MovieDetailView.as_view(), name='movie_detail'),
     path('<int:pk>/delete/', MovieDeleteView.as_view(), name='movie_delete'),
     path('new/', MovieCreateView.as_view(), name='movie_new'),
+    path('trending/', DiscussionListViewTrending.as_view(), name='discussion_trending'),
     path('request/', MovieRequestView.as_view(), name='movie_request'),
     path('request_list/<title>/<year>/', MovieRequestListView.as_view(), name='movie_request_list_year'),
     path('request_list/<title>/', MovieRequestListView.as_view(), name='movie_request_list'),

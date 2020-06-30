@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Discussion{% endblock title %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active">Trending Discussions </li>
+  </ol>
+</nav>
+
+  
+  {% for discussion in object_list %}
+        <div class="modal" id="report">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            <!-- Modal Header -->
+              <div class="modal-header">
+                <div class="col-11">
+                  <h4 class="modal-title text-center">Report</h4>
+                </div>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form class ='form', method='POST' action = '{% url "report" %}'> {% csrf_token %}
+                  <input type='hidden' name ='discussion_id' value='{{discussion.id}}'/>
+                  <input type='hidden' name ='reported_id' value='{{discussion.author.id}}'/>
+                  <!--<input name="short_reason" class="form-control mr-sm-2" type="text" placeholder="Short Reason" aria-label="Short Reason"> -->
+                  <select class="form-control" name="short_reason">
+                    <option value="" disabled selected>Select your option</option>
+                    <option value="spam">It's a spam</option>
+                    <option value="inappropriate">It's inappropriate</option>
+                  </select>
+                  <br>
+                  <input name="long_reason" class="form-control mr-sm-2" type="text" placeholder="More Detail" aria-label="More Detail">
+                  <br>
+                  <button class="btn btn-danger" style="float:right" type="submit" value="Submit"> Report   </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+        
+          <div class="col row align-items-center ml-1">
+            <div class="align-self-center">
+              <span class="font-weight-bold"> <a href="{{ discussion.get_absolute_url }}">{{ discussion.title }}</a></span> &middot;
+              <span><a href="{{ discussion.author.get_absolute_url }}">{{ discussion.author }}</a> &middot; {{ discussion.date|timesince }}</span>
+            </div>
+          </div>
+          <div class="col-auto">
+                <div class="dropdown dropright">
+                  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"></button>
+                    
+                    <div class="dropdown-menu">
+                    {% if user == discussion.author %}
+                      <a class="dropdown-item" href="{% url 'discussion_edit' discussion.movie.pk discussion.pk %}">Edit</a> 
+                      <a class="dropdown-item" href="{% url 'discussion_delete' discussion.movie.pk discussion.pk %}">Delete</a>
+                    {% endif %}
+                      <!-- Report start -->
+                      <a class="dropdown-item" data-toggle="modal" data-target="#report">Report</a>
+                    
+                    </div>
+                </div>
+                
+          </div>
+        </div>
+      </div>
+      <div class="card-body ml-1">
+              <p>{{ discussion.body }}</p>
+      </div>
+    </div>
+    <br />
+  {% endfor %}
+{% endblock content %}

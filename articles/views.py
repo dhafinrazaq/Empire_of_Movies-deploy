@@ -298,7 +298,6 @@ class DownvoteDiscussionView(LoginRequiredMixin, View):
 class DiscussionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Discussion
     template_name ='discussions/discussion_delete.html'
-    success_url = reverse_lazy('movie_list')
     login_url = 'account_login'
 
     def test_func(self):
@@ -316,11 +315,13 @@ class DiscussionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         context['discussion_pk'] = self.kwargs.get('discussion_pk')
         return context
 
+    def get_success_url(self):
+        return reverse_lazy('movie_detail', kwargs={'pk': self.kwargs.get('movie_pk')})
+
 class DiscussionEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Discussion
     fields =('body',)
     template_name = 'discussions/discussion_edit.html'
-    success_url = reverse_lazy('movie_list')
     login_url ='account_login'
 
     def test_func(self):
@@ -337,6 +338,7 @@ class DiscussionEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         context['discussion_name'] = Discussion.objects.get(pk=self.kwargs.get('discussion_pk')).title
         context['discussion_pk'] = self.kwargs.get('discussion_pk')
         return context
+
 
 class DiscussionListViewTop(LoginRequiredMixin, ListView):
     model = Discussion
@@ -363,6 +365,16 @@ class DiscussionListViewNew(LoginRequiredMixin, ListView):
         context['movie_name'] = Movie.objects.get(pk=self.kwargs.get('movie_pk')).title
         context['movie_pk'] = self.kwargs.get('movie_pk')
         context['sort_by'] = 'new'
+        return context
+
+class DiscussionListViewTrending(LoginRequiredMixin, ListView):
+    model = Discussion
+    template_name = 'discussions/discussion_list_trending.html'
+    login_url = 'account_login'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object_list'] = Discussion.objects.all().order_by('-date')
         return context
 
 class ReviewDetailView(LoginRequiredMixin, DetailView):
@@ -425,7 +437,6 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
 class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Review
     template_name ='reviews/review_delete.html'
-    success_url = reverse_lazy('movie_list')
     login_url = 'account_login'
 
     def test_func(self):
@@ -444,11 +455,13 @@ class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         context['review_pk'] = self.kwargs.get('review_pk')
         return context
 
+    def get_success_url(self):
+        return reverse_lazy('movie_detail', kwargs={'pk': self.kwargs.get('movie_pk')})
+
 class ReviewEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review
     fields =('body',)
     template_name = 'reviews/review_edit.html'
-    success_url = reverse_lazy('movie_list')
     login_url ='account_login'
 
     def test_func(self):
@@ -515,7 +528,6 @@ class CommentCreateView(LoginRequiredMixin, TemplateView):
 class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
     template_name ='comment/comment_delete.html'
-    success_url = reverse_lazy('movie_list')
     login_url = 'account_login'
 
     def test_func(self):
@@ -532,6 +544,9 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         context['discussion_name'] = Discussion.objects.get(pk=self.kwargs.get('discussion_pk')).title
         context['discussion_pk'] = self.kwargs.get('discussion_pk')
         return context
+
+    def get_success_url(self):
+        return reverse_lazy('discussion_detail', kwargs={'movie_pk': self.kwargs.get('movie_pk'), 'discussion_pk':self.kwargs.get('discussion_pk')})
 
 class CommentEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
@@ -553,3 +568,6 @@ class CommentEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         context['discussion_name'] = Discussion.objects.get(pk=self.kwargs.get('discussion_pk')).title
         context['discussion_pk'] = self.kwargs.get('discussion_pk')
         return context
+    def get_success_url(self):
+        return reverse_lazy('discussion_detail', kwargs={'movie_pk': self.kwargs.get('movie_pk'), 'discussion_pk':self.kwargs.get('discussion_pk')})
+    

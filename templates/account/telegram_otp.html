@@ -2,13 +2,24 @@
 {% block title %}Connect to Telegram{% endblock %}
 {% block content %}
 <div class="container">
-<h1>Connect to Telegram</h1>
-<p>You will receive notifications when there is a new discussion or review for a movie you follow.</p>
-<ol>
-    <li>Add <code>EmpireOfMoviesbot</code> on Telegram</li>
-    <li>Send the command <code>/start</code></li>
-    <li>Send the command <code>/login {{user.username}} {{OTP}}</code></li>
-    <li>You should receive <cite>You are logged in </cite></li>
-</ol>
+    <h1>Connect to Telegram</h1>
+    {% if user.telegram_id%}
+        <p> You are already connected to a Telegram account.</p> 
+        <p>If you want to change the telegram account linked, you can use <code>/logout</code> or press the button below.  
+            <form class ='form', method='POST' action = '{% url "disconnect_telegram" %}'> {% csrf_token %}
+                <button class='btn btn-danger'>
+                Disconnect
+                </button>
+            </form>
+        </p>
+    {%else%}
+        <p>You will receive notifications when there is a new discussion or review for a movie you follow.</p>
+        <ol>
+            <li>Add <code>EmpireOfMoviesbot</code> on Telegram</li>
+            <li>Send the command <code>/start</code></li>
+            <li>Send the command <code>/login {{user.username}} {{OTP}}</code></li>
+            <li>You should receive <cite>You are logged in </cite></li>
+        </ol>
+    {% endif %}
 </div>
 {% endblock content %}
