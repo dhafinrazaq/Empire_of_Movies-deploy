@@ -113,6 +113,14 @@
   {% endif %}
   </p>
 </div>
+<form class ='form', method='POST' action = '{% url "comment_new" discussion.movie.id discussion.id %}'> {% csrf_token %}
+            <input type='hidden' name ='discussion_id' value='{{discussion.id}}'/>
+            <br>
+            <div class="row">
+              <input name="title" class="form-control col" type="text" placeholder="New comment" aria-label="New comment">&ensp;
+            <button class="btn btn-success col-auto" type="submit" value="Submit">Comment</button>
+            </div>
+</form>
 <br><br>
   {% for comment in comment_list %}
                      <div class="modal" id="report">
@@ -221,14 +229,10 @@
             <div id="form-comment">
                 {% get_comment_form for object as form %}
                 <form action="/comments/post/" method="post">{% csrf_token %}
-                
-                    <input type="hidden" value="{{user.username}}" name="name" maxlength="50" required="" id="id_name">
-<input type="hidden" value="{{ discussion.title }}" name="title" maxlength="255" id="id_title">
-<p><label for="id_comment">Comment:</label> <textarea name="comment" cols="40" rows="10" maxlength="3000" required="" id="id_comment"></textarea></p>
-<p><label for="id_honeypot">If you enter anything in this field your comment will be treated as spam:</label> <input type="text" name="honeypot" id="id_honeypot"><input type="hidden" name="content_type" value="articles.discussion" id="id_content_type"><input type="hidden" name="object_pk" value="89" id="id_object_pk"><input type="hidden" name="timestamp" value="1593667484" id="id_timestamp"><input type="hidden" name="security_hash" value="043ac3370d928a0232afbe6bb7e77afbb3d371e4" id="id_security_hash"><input type="hidden" name="parent" id="id_parent" value="3"></p>
-
+                    {{ form.as_p }}{# just to keep the example simple. Consider using django-crispy-forms in real life #}
+                    <input type="hidden" value={{user.username}} name="name" maxlength="50" required="" id="id_name">
                     <p>
-                      <input type="submit" value="Submit Comment">
+                      <input type="submit" value="Submit Comment"/>
                       <a href="#c0" id="cancel_reply">cancel reply</a>
                     </p>
                 </form>
@@ -236,6 +240,5 @@
         </div>
     </div>
 
-    
-
+                
 {% endblock content %}
