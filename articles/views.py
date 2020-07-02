@@ -213,6 +213,7 @@ class DiscussionDetailView(LoginRequiredMixin, DetailView):
     template_name = 'discussions/discussion_detail.html'
     login_url = 'account_login'
 
+    
     def get_object(self):
         return Discussion.objects.get(pk=self.kwargs.get('discussion_pk'))
 
