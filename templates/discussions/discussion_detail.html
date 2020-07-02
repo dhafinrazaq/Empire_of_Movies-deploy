@@ -1,4 +1,31 @@
 {% extends 'base.html' %}
+{% load threadedcomments_tags %}
+
+
+{% block javascript %}
+    <script type="text/javascript">
+
+        function show_reply_form(event) {
+            var $this = $(this);
+            var comment_id = $this.data('comment-id');
+
+            $('#id_parent').val(comment_id);
+            $('#form-comment').insertAfter($this.closest('.comment'));
+        };
+
+        function cancel_reply_form(event) {
+            $('#id_comment').val('');
+            $('#id_parent').val('');
+            $('#form-comment').appendTo($('#wrap_write_comment'));
+        }
+
+        $.fn.ready(function() {
+            $('.comment_reply_link').click(show_reply_form);
+            $('#cancel_reply').click(cancel_reply_form);
+        })
+
+    </script>
+{% endblock %}
 
 {% block content %}
 <nav aria-label="breadcrumb">
@@ -86,14 +113,6 @@
   {% endif %}
   </p>
 </div>
-<form class ='form', method='POST' action = '{% url "comment_new" discussion.movie.id discussion.id %}'> {% csrf_token %}
-            <input type='hidden' name ='discussion_id' value='{{discussion.id}}'/>
-            <br>
-            <div class="row">
-              <input name="title" class="form-control col" type="text" placeholder="New comment" aria-label="New comment">&ensp;
-            <button class="btn btn-success col-auto" type="submit" value="Submit">Comment</button>
-            </div>
-</form>
 <br><br>
   {% for comment in comment_list %}
                      <div class="modal" id="report">
@@ -162,4 +181,60 @@
     </div>
     <br />
   {% endfor %}
+
+
+{% get_comment_list for object as comment_list %}
+    <h2><a href="/">Back</a></h2>
+
+    <div class="message">
+        <p class="title">{{ object.title }}</p>
+        <p class="text">{{ object.text }}</p>
+    </div>
+
+    <div class="comments_wrapper" id="comments">
+        <div class="comments_length">
+            <p>{{ comment_list|length }} Comments</p>
+        </div>
+
+        <div class="comments">
+            {% for comment in comment_list|fill_tree|annotate_tree %}{% ifchanged comment.parent_id %}{% else %}</li>{% endifchanged %}{% if not comment.open and not comment.close %}</li>{% endif %}{% if comment.open %}
+                <ul>{% endif %}
+            <li class="comment_li" id="c{{ comment.id }}">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
+                <div class="comment">
+                    <div class="comment_info">
+                        <div class="comment_user">{{ comment.user_name }}</div>
+                        <div class="comment_data">
+                            {{ comment.submit_date|date:"d M Y, H:i" }}
+                          | <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link">Reply</a>
+                        </div>
+                    </div>
+                    <div class="comment_text">
+                        {{ comment.comment }}
+                    </div>
+                </div>
+                {% for close in comment.close %}</li></ul>{% endfor %}
+
+            {% endfor %}
+        </div>
+
+        <div id="wrap_write_comment">
+            <div id="form-comment">
+                {% get_comment_form for object as form %}
+                <form action="/comments/post/" method="post"><input type="hidden" name="csrfmiddlewaretoken" value="28UHoDPpkXtvGSsLnIbas6pph8FVvW1XAzs0K40DFJ5Tdhbz3iU2KOG8HQnwdhKp">
+                    <input type="hidden" value="{{user.username}}" name="name" maxlength="50" required="" id="id_name">
+<input type="hidden" value="{{ discussion.title }}" name="title" maxlength="255" id="id_title">
+<p><label for="id_comment">Comment:</label> <textarea name="comment" cols="40" rows="10" maxlength="3000" required="" id="id_comment"></textarea></p>
+<p><label for="id_honeypot">If you enter anything in this field your comment will be treated as spam:</label> <input type="text" name="honeypot" id="id_honeypot"><input type="hidden" name="content_type" value="articles.discussion" id="id_content_type"><input type="hidden" name="object_pk" value="89" id="id_object_pk"><input type="hidden" name="timestamp" value="1593667484" id="id_timestamp"><input type="hidden" name="security_hash" value="043ac3370d928a0232afbe6bb7e77afbb3d371e4" id="id_security_hash"><input type="hidden" name="parent" id="id_parent" value="3"></p>
+
+                    <p>
+                      <input type="submit" value="Submit Comment">
+                      <a href="#c0" id="cancel_reply">cancel reply</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+
 {% endblock content %}

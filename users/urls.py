@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import ProfileUpdateView, TelegramOTPView, ProfileFollowingView, ProfileDiscussionView, ProfileCommentView, ProfileReviewView
+from .views import ProfileUpdateView, TelegramOTPView, ProfileFollowingView, ProfileDiscussionView, ProfileCommentView, ProfileReviewView, TelegramDisconnectView
 from allauth.account.views import PasswordChangeView
 # from .views import SocialLoginView
 
 urlpatterns = [
+    path('disconnect/', TelegramDisconnectView.as_view(), name ='disconnect_telegram'),
     path('update/', ProfileUpdateView.as_view(), name='update_profile'),
     path('telegram_otp/', TelegramOTPView.as_view(), name='telegram_otp'),
     path('password/', PasswordChangeView.as_view(), name='change_password'),

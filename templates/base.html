@@ -8,33 +8,119 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
-  .google-icon {
+  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 50px;
+  }
+
+    .bootstrap-select .dropdown-toggle .filter-option {
     position: absolute;
-    margin-top: 11px;
-    margin-left: 11px;
-    width: 18px;
-    height: 18px;
-  }
-  .fa {
-    padding: 20px;
-    font-size: 30px;
-    width: 100px;
+    top: 0;
+    left: 0;
+    padding-top: inherit;
+    padding-right: inherit;
+    padding-bottom: inherit;
+    padding-left: inherit;
+    height: 100%;
+    width: 0%;
+    text-align: left;
+    }
+    .bootstrap-select > .dropdown-toggle {
+    position: relative;
+    width: 50px;
+    z-index: 1;
     text-align: center;
-    text-decoration: none;
-    margin: 5px 2px;
-  }
+    white-space: nowrap;
+    }
 
-  .fa-facebook {
-    background: #3B5998;
-    color: white;
-  }
+    /* BEGIN COMMENTS */
 
-  .fa-google {
-    background: #4285f4;
-    color: white;
-  }
-</style>
+        .comment {
+            padding: 10px;
+            margin: 10px;
+            position: relative;
+        }
 
+        .comment_li {
+            list-style: none;
+
+        }
+
+        .comment_last {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .comment_info {
+            line-height: 24px;
+            position: relative;
+        }
+
+        .comment_user {
+            text-decoration: underline;
+            margin-right: 10px;
+            font-weight: bold;
+            color: #666;
+            font-size: .99em;
+            cursor: pointer;
+            float: left;
+        }
+
+        .comment_data {
+            font-size: 11px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .comment_text {
+            margin-top: 10px;
+            float: inherit;
+            font-size: 1.08em;
+            color: black;
+        }
+
+        .comment_reply_link {
+            color: #004276;
+            outline: none;
+            text-decoration: none;
+            vertical-align: baseline;
+        }
+
+        .comments_length {
+            padding-left: 15px;
+            font-weight: bold;
+        }
+
+        #form-comment {
+            padding: 15px;
+            margin: 15px;
+            background-color: #faf0e6;
+            width: 500px;
+        }
+
+        form label {
+            float: left;
+            width: 130px;
+        }
+
+        label[for=id_honeypot],
+        #id_honeypot {
+          display: none;
+        }
+
+        #cancel_reply {
+            display: none;
+        }
+
+        .comments #cancel_reply {
+          display: inline;
+        }
+
+        /* END COMMENTS */
+
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    {% block javascript %}{% endblock %}
+    {% block extrahead %}{% endblock %}
 
 </head>
 <body>
@@ -46,17 +132,16 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     {% if user.is_authenticated %}
       <form class="form-inline" action="{% url 'search_results' %}" method="get">
-                    <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                          <select name="filter" class="selectpicker" multiple placeholder="Filter By:">
-                            <option value="user_search" selected>User</option>
-                            <option value="title" selected>Title</option>
-                            <option value="year" selected>Year</option>
-                            <option value="synopsis" selected>Synopsis</option>
-                            <option value="stars" selected>Stars</option>
-                            <option value="genres" selected>Genre</option>
-                            <option value="keywords" selected>Keywords</option>
-                          </select>
-                      
+        <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <select name="filter" class="selectpicker" multiple placeholder="Filter By:">
+            <option value="user_search" selected>User</option>
+            <option value="title" selected>Title</option>
+            <option value="year" selected>Year</option>
+            <option value="synopsis" selected>Synopsis</option>
+            <option value="stars" selected>Stars</option>
+            <option value="genres" selected>Genre</option>
+            <option value="keywords" selected>Keywords</option>
+          </select>
       </form>
       <ul class="navbar-nav mx-auto">
         <li class="nav-item"><a class="nav-link" href="{% url 'movie_followed' %}">Followed Movies</a></li>
@@ -64,9 +149,10 @@
         <li class="nav-item"><a class="nav-link" href="{%url 'movie_request'%}"> Request Movie </a> </li>
       </ul>
       <ul class="navbar-nav ml-auto">
+        <li><a class="nav-link" href="{% url 'telegram_otp'%}">Connect to Telegram</a></li>
         {% if user.have_notification %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications</a>
+            <a class="nav-link  text-danger" href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications</a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-item">
                 <form class ='form', method='POST' action = '{% url "notification_clear_all" %}'> {% csrf_token %}
@@ -101,7 +187,7 @@
           </li>
         {% else %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications</a>
+            <a class="nav-link " href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications</a>
               <div class="dropdown-menu dropdown-menu-right">
                   <p class="dropdown-item disabled">You have no notification</p>
                 </div>
@@ -114,7 +200,6 @@
             <a class="dropdown-item" href="{{user.get_absolute_url}}">Profile</a>
             <a class="dropdown-item" href="{% url 'update_profile'%}">Update Profile</a>
             <a class="dropdown-item" href="{% url 'account_change_password'%}">Change Password</a>
-            <a class="dropdown-item" href="{% url 'telegram_otp'%}">Connect to Telegram</a>
             <a class="dropdown-item" href="{%url 'account_logout'%}">Log out</a>
           </div>
         </li>
@@ -130,21 +215,19 @@
   </div>  
 </nav>
 <br>
-
+      
     <div class="container">
       {% block content %}
       {% endblock content %}
     </div>
 
-    
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
   {% comment %} <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script> {% endcomment %}
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> 
+ 
 </body>
 </html>
 

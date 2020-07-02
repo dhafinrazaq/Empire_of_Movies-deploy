@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "681f7c943360efe28ee0c02b28c9ece83ad60f49597b46108c37d0c74ba926f2"
+            "sha256": "92830e34660673fd8a5cc7653bd78fa7cf9384405396fc0a64b422858bd4d2ce"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -26,10 +26,10 @@
         },
         "certifi": {
             "hashes": [
-                "sha256:5ad7e9a056d25ffa5082862e36f119f7f7cec6457fa07ee2f8c339814b80c9b1",
-                "sha256:9cd41137dc19af6a5e03b630eefe7d1f458d964d406342dd3edf625839b944cc"
+                "sha256:5930595817496dd21bb8dc35dad090f1c2cd0adfaf21204bf6732ca5d8ee34d3",
+                "sha256:8fc0819f1f30ba15bdb34cceffb9ef04d99f420f68eb75d901e9560b8749fc41"
             ],
-            "version": "==2020.4.5.2"
+            "version": "==2020.6.20"
         },
         "cffi": {
             "hashes": [
@@ -132,6 +132,14 @@
             "index": "pypi",
             "version": "==0.40.0"
         },
+        "django-contrib-comments": {
+            "hashes": [
+                "sha256:b83320a86081a76bc0570e6cc0f924c0ced40b46ae9f5dd783ab2c745b449529",
+                "sha256:d1232bade3094de07dcc205fc833204384e71ba9d30caadcb5bb2882ce8e8d31"
+            ],
+            "index": "pypi",
+            "version": "==1.9.2"
+        },
         "django-crispy-forms": {
             "hashes": [
                 "sha256:0afc0ba730f52a13c02bfbd0e1423af4577a337d73a8a0ef96f2cbbc5f345ffa",
@@ -147,6 +155,14 @@
             ],
             "index": "pypi",
             "version": "==1.4.0"
+        },
+        "django-threadedcomments": {
+            "hashes": [
+                "sha256:24d5c67b6b175c155d0c642e715de70602dbb3f6d9300532cbf954b22888554e",
+                "sha256:5a313a13ef02ee95f3818ee0b8eff64d58988edff48668de148b3751279c7ea3"
+            ],
+            "index": "pypi",
+            "version": "==1.2"
         },
         "future": {
             "hashes": [
@@ -164,10 +180,10 @@
         },
         "idna": {
             "hashes": [
-                "sha256:7588d1c14ae4c77d74036e8c22ff447b26d0fde8f007354fd48a7814db15b7cb",
-                "sha256:a068a21ceac8a4d63dbfd964670474107f541babbd2250d61922f029858365fa"
+                "sha256:b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6",
+                "sha256:b97d804b1e9b523befed77c48dacec60e6dcb0b5391d57af6a65a312a90648c0"
             ],
-            "version": "==2.9"
+            "version": "==2.10"
         },
         "oauthlib": {
             "hashes": [
@@ -229,10 +245,10 @@
         },
         "python3-openid": {
             "hashes": [
-                "sha256:0086da6b6ef3161cfe50fb1ee5cceaf2cda1700019fda03c2c5c440ca6abe4fa",
-                "sha256:628d365d687e12da12d02c6691170f4451db28d6d68d050007e4a40065868502"
+                "sha256:33fbf6928f401e0b790151ed2b5290b02545e8775f982485205a066f874aaeaf",
+                "sha256:6626f771e0417486701e0b4daff762e7212e820ca5b29fcc0d05f6f8736dfa6b"
             ],
-            "version": "==3.1.0"
+            "version": "==3.2.0"
         },
         "pytz": {
             "hashes": [

@@ -27,6 +27,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic', 
     'django.contrib.staticfiles',
+    
+    
+    'django_comments',
+    'threadedcomments',
+    
+
+
     'django.contrib.sites', 
     'users.apps.UsersConfig',
     'report.apps.ReportConfig',
@@ -216,3 +223,8 @@ AUTHENTICATION_BACKENDS = (
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_SESSION_REMEMBER = True
+
+DEFAULT_FROM_EMAIL = 'empireofmovies@gmail.com'
+
+# comment
+COMMENTS_APP = 'threadedcomments'
