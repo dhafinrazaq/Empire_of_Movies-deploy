@@ -8,36 +8,30 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
-  .google-icon {
+  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 50px;
+  }
+
+    .bootstrap-select .dropdown-toggle .filter-option {
     position: absolute;
-    margin-top: 11px;
-    margin-left: 11px;
-    width: 18px;
-    height: 18px;
-  }
-  .fa {
-    padding: 20px;
-    font-size: 30px;
-    width: 100px;
+    top: 0;
+    left: 0;
+    padding-top: inherit;
+    padding-right: inherit;
+    padding-bottom: inherit;
+    padding-left: inherit;
+    height: 100%;
+    width: 0%;
+    text-align: left;
+    }
+    .bootstrap-select > .dropdown-toggle {
+    position: relative;
+    width: 50px;
+    z-index: 1;
     text-align: center;
-    text-decoration: none;
-    margin: 5px 2px;
-  }
-
-  .fa-facebook {
-    background: #3B5998;
-    color: white;
-  }
-
-  .fa-google {
-    background: #4285f4;
-    color: white;
-  }
-
-  .container {padding:20px;}
-  .form-control {width:120px;}
-  .popover {max-width:400px;}
-</style>
+    white-space: nowrap;
+    }
+  </style>
 
 
 </head>
@@ -50,17 +44,16 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     {% if user.is_authenticated %}
       <form class="form-inline" action="{% url 'search_results' %}" method="get">
-                    <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                          <select name="filter" class="selectpicker" multiple placeholder="Filter By:">
-                            <option value="user_search" selected>User</option>
-                            <option value="title" selected>Title</option>
-                            <option value="year" selected>Year</option>
-                            <option value="synopsis" selected>Synopsis</option>
-                            <option value="stars" selected>Stars</option>
-                            <option value="genres" selected>Genre</option>
-                            <option value="keywords" selected>Keywords</option>
-                          </select>
-                      
+        <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <select name="filter" class="selectpicker" multiple placeholder="Filter By:">
+            <option value="user_search" selected>User</option>
+            <option value="title" selected>Title</option>
+            <option value="year" selected>Year</option>
+            <option value="synopsis" selected>Synopsis</option>
+            <option value="stars" selected>Stars</option>
+            <option value="genres" selected>Genre</option>
+            <option value="keywords" selected>Keywords</option>
+          </select>
       </form>
       <ul class="navbar-nav mx-auto">
         <li class="nav-item"><a class="nav-link" href="{% url 'movie_followed' %}">Followed Movies</a></li>
@@ -68,9 +61,10 @@
         <li class="nav-item"><a class="nav-link" href="{%url 'movie_request'%}"> Request Movie </a> </li>
       </ul>
       <ul class="navbar-nav ml-auto">
+        <li><a class="nav-link" href="{% url 'telegram_otp'%}">Connect to Telegram</a></li>
         {% if user.have_notification %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications</a>
+            <a class="nav-link  text-danger" href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications</a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-item">
                 <form class ='form', method='POST' action = '{% url "notification_clear_all" %}'> {% csrf_token %}
@@ -105,7 +99,7 @@
           </li>
         {% else %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications</a>
+            <a class="nav-link " href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications</a>
               <div class="dropdown-menu dropdown-menu-right">
                   <p class="dropdown-item disabled">You have no notification</p>
                 </div>
@@ -118,7 +112,6 @@
             <a class="dropdown-item" href="{{user.get_absolute_url}}">Profile</a>
             <a class="dropdown-item" href="{% url 'update_profile'%}">Update Profile</a>
             <a class="dropdown-item" href="{% url 'account_change_password'%}">Change Password</a>
-            <a class="dropdown-item" href="{% url 'telegram_otp'%}">Connect to Telegram</a>
             <a class="dropdown-item" href="{%url 'account_logout'%}">Log out</a>
           </div>
         </li>
@@ -140,15 +133,13 @@
       {% endblock content %}
     </div>
 
-    
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
   {% comment %} <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script> {% endcomment %}
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> 
+ 
 </body>
 </html>
 

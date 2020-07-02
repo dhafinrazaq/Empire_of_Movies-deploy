@@ -8,6 +8,7 @@ import hashlib
 import datetime
 from .forms import CustomUserChangeForm
 from articles.models import Discussion, Review, Comment
+from django.shortcuts import redirect
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
@@ -79,4 +80,12 @@ class ProfileCommentView(LoginRequiredMixin, TemplateView):
         context['comments'] = Comment.objects.filter(author=context['user_view'])
         return context
 
+class TelegramDisconnectView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        #print(request.POST)
+        user = self.request.user
+        user.telegram_id = None
+        user.chat_id = None
+        user.save()
+        return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
