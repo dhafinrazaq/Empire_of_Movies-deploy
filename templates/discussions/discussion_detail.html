@@ -220,7 +220,8 @@
         <div id="wrap_write_comment">
             <div id="form-comment">
                 {% get_comment_form for object as form %}
-                <form action="/comments/post/" method="post"><input type="hidden" name="csrfmiddlewaretoken" value="28UHoDPpkXtvGSsLnIbas6pph8FVvW1XAzs0K40DFJ5Tdhbz3iU2KOG8HQnwdhKp">
+                <form action="/comments/post/" method="post">{% csrf_token %}
+                
                     <input type="hidden" value="{{user.username}}" name="name" maxlength="50" required="" id="id_name">
 <input type="hidden" value="{{ discussion.title }}" name="title" maxlength="255" id="id_title">
 <p><label for="id_comment">Comment:</label> <textarea name="comment" cols="40" rows="10" maxlength="3000" required="" id="id_comment"></textarea></p>
