@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%-#u&bhr_31k901s6vf6ktiax9x!_(efmh6-n*!5w6joqgz#fa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'empire-of-movies.herokuapp.com']
 
@@ -100,24 +100,24 @@ DATABASES = {
     #     'PORT': '5432',
     # }
 
-    #     'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'empire2',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'gilbert19',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '5432',
-    # }
-    
-
-    'default': {
+        'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'empire_of_movies',
-        'USER': 'dhafinrazaq',
-        'PASSWORD': '123',
+        'NAME': 'empire2',
+        'USER': 'postgres',
+        'PASSWORD': 'gilbert19',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
+    
+
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'empire_of_movies',
+    #     'USER': 'dhafinrazaq',
+    #     'PASSWORD': '123',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '5432',
+    # }
 
 }
 db_from_env = dj_database_url.config(conn_max_age=600)

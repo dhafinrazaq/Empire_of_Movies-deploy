@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load threadedcomments_tags %}
-
+{% load crispy_forms_tags %}
 
 {% block javascript %}
     <script type="text/javascript">
@@ -113,74 +113,6 @@
   {% endif %}
   </p>
 </div>
-  {% comment %} {% for comment in comment_list %}
-                     <div class="modal" id="report">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                        <!-- Modal Header -->
-                          <div class="modal-header">
-                            <div class="col-11">
-                              <h4 class="modal-title text-center">Report</h4>
-                            </div>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          </div>
-                          <!-- Modal body -->
-                          <div class="modal-body">
-                            <form class ='form', method='POST' action = '{% url "report" %}'> {% csrf_token %}
-                              <input type='hidden' name ='comment_id' value='{{comment.id}}'/>
-                              <input type='hidden' name ='reported_id' value='{{comment.author.id}}'/>
-                              <!--<input name="short_reason" class="form-control mr-sm-2" type="text" placeholder="Short Reason" aria-label="Short Reason"> -->
-                              <select class="form-control" name="short_reason">
-                                <option value="" disabled selected>Select your option</option>
-                                <option value="spam">It's a spam</option>
-                                <option value="inappropriate">It's inappropriate</option>
-                              </select>
-                              <br>
-                              <input name="long_reason" class="form-control mr-sm-2" type="text" placeholder="More Detail" aria-label="More Detail">
-                              <br>
-                              <button class="btn btn-danger" style="float:right" type="submit" value="Submit"> Report   </button>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  
-    <div class="card">
-      <div class="card-header">
-        
-          <div>
-            <span> {{ comment.title }}</span>
-          </div>
-      </div>
-      <div class="card-footer">
-        <div class="row">
-          <div class="col">
-              <div class="dropdown dropright">
-                <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"></button>
-                  
-                  <div class="dropdown-menu">
-                  {% if user == comment.author %}
-                    <a class="dropdown-item" href="{% url 'comment_edit' comment.discussion.movie.pk comment.discussion.pk comment.pk  %}">Edit</a> 
-                    <a class="dropdown-item" href="{% url 'comment_delete' comment.discussion.movie.pk comment.discussion.pk comment.pk %}">Delete</a>
-                  {% endif %}
-                    <!-- Report start -->
-                     <a class="dropdown-item" data-toggle="modal" data-target="#report">Report</a>
-                  
-                  </div>
-              </div>
-              
-          </div>
-          <div class="col-auto row align-items-center mr-1">
-            <div class="align-self-center">
-              <span><a href="{{ comment.author.get_absolute_url }}">{{ comment.author }}</a> &middot; {{ comment.date|timesince }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <br />
-  {% endfor %} {% endcomment %}
-
 
 {% get_comment_list for object as comment_list %}
     <div class="comments_wrapper" id="comments">
@@ -209,14 +141,15 @@
             {% endfor %}
         </div>
 
-        <div id="wrap_write_comment">
-            <div id="form-comment">
+        <div id="wrap_write_comment" style="background-color:white">
+            <div id="form-comment" style="background-color:white">
                 {% get_comment_form for object as form %}
-                <form action="/comments/post/" method="post">{% csrf_token %}
-                    {{ form.as_p }}{# just to keep the example simple. Consider using django-crispy-forms in real life #}
+                <form action="/comments/post/" method="post" style="background-color:white">{% csrf_token %}
+                    {{ form | crispy }}
                     <input type="hidden" value={{user.username}} name="name" maxlength="50" required="" id="id_name">
+                    <input type="hidden" name="next" value="{{ discussion.get_absolute_url }}" />
                     <p>
-                      <input type="submit" value="Submit Comment"/>
+                      <button class="btn btn-success ml-2" type="submit">Submit</button>
                       <a href="#c0" id="cancel_reply">cancel reply</a>
                     </p>
                 </form>
