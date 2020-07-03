@@ -158,9 +158,9 @@ class CommentDetailsForm(CommentSecurityForm):
             object_pk=new.object_pk,
             user_name=new.user_name,
         )
-        for old in possible_duplicates:
-            if old.submit_date.date() == new.submit_date.date() and old.comment == new.comment:
-                return old
+        # for old in possible_duplicates:
+        #     if old.submit_date.date() == new.submit_date.date() and old.comment == new.comment:
+        #         return old
 
         return new
 

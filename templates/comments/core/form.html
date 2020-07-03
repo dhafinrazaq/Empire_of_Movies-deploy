@@ -1,6 +1,7 @@
+{% load crispy_forms_tags %}
 <div id="form-comment">
     <form action="/comments/post/" method="post">{% csrf_token %}
-        {{ form.as_p }}{# just to keep the example simple. Consider using django-crispy-forms in real life #}
+        {{ form | crispy }} {# just to keep the example simple. Consider using django-crispy-forms in real life #}
 
         <p>
             <input type="submit" value="Submit Comment"/>
