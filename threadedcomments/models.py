@@ -17,6 +17,9 @@ class ThreadedComment(Comment):
 
     objects = CommentManager()
 
+    def __str__(self): 
+        return self.comment or ' '
+
     @property
     def depth(self):
         return len(self.tree_path.split(PATH_SEPARATOR))

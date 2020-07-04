@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from .models import Movie, Discussion, Review, Comment
+from threadedcomments.models import ThreadedComment
 from report.models import Report
 from django.contrib.auth import get_user_model
 
@@ -20,7 +21,7 @@ class DiscussionUpvotersInline(admin.TabularInline):
     extra = 0
 
 class CommentsInline(admin.TabularInline):
-    model = Comment
+    model = ThreadedComment
     extra = 0
 
 class DiscussionInline(admin.TabularInline): # new 
@@ -39,9 +40,9 @@ class ReviewReportInline(admin.TabularInline):
     model = Report
     extra = 0
 
-class CommentReportInline(admin.TabularInline):
-    model = Report
-    extra = 0
+# class CommentReportInline(admin.TabularInline):
+#     model = Report
+#     extra = 0
 
 class MovieAdmin(admin.ModelAdmin): # new 
     inlines = [
@@ -55,7 +56,7 @@ class DiscussionAdmin(admin.ModelAdmin): # new
     inlines = [
         DiscussionUpvotersInline,
         DiscussionDownvotersInline,
-        CommentsInline,
+        # CommentsInline,
         DiscussionReportInline,
     ]
 
@@ -64,13 +65,13 @@ class ReviewAdmin(admin.ModelAdmin): # new
         ReviewReportInline,
     ]
 
-class CommentAdmin(admin.ModelAdmin): # new 
-    inlines = [
-        CommentReportInline,
-    ]
+# class CommentAdmin(admin.ModelAdmin): # new 
+#     inlines = [
+#         CommentReportInline,
+#     ]
     
     
 admin.site.register(Movie, MovieAdmin) # new 
 admin.site.register(Review, ReviewAdmin)
 admin.site.register(Discussion, DiscussionAdmin)
-admin.site.register(Comment, CommentAdmin)
+# admin.site.register(Comment, CommentAdmin)

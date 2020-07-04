@@ -69,7 +69,7 @@ class Discussion(models.Model):
     
 
     def __str__(self): 
-        return self.title
+        return self.title or ' '
 
     def get_absolute_url(self):
         return reverse('discussion_detail', args=[str(self.movie.id), str(self.id)])
@@ -99,7 +99,7 @@ class Review(models.Model):
     )
 
     def __str__(self): 
-        return self.title
+        return self.title or ' '
 
     def get_absolute_url(self):
         return reverse('review_detail', args=[str(self.movie.id), str(self.id)])
@@ -122,7 +122,7 @@ class Comment(models.Model):
     )
     
     def __str__(self): 
-        return self.title
+        return self.title or ' '
 
     def get_absolute_url(self):
         return reverse('comment_detail', args=[str(self.discussion.movie.pk), str(self.discussion.pk), str(self.pk)])

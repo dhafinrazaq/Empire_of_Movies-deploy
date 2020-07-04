@@ -58,7 +58,7 @@
               <div class="modal-body">
                 <form class ='form', method='POST' action = '{% url "report" %}'> {% csrf_token %}
                   <input type='hidden' name ='discussion_id' value='{{discussion.id}}'/>
-                  <input type='hidden' name ='reported_id' value='{{discussion.author.id}}'/>
+                  <input type='hidden' name ='reported_id' value='{{discussion.author.username}}'/>
                   <!--<input name="short_reason" class="form-control mr-sm-2" type="text" placeholder="Short Reason" aria-label="Short Reason"> -->
                   <select class="form-control" name="short_reason">
                     <option value="" disabled selected>Select your option</option>
@@ -133,7 +133,37 @@
                 <ul>
               {% endif %}
             <li class="comment_li" id="c{{ comment.id }}">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
-                
+                    <div class="modal" id="report">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                        <!-- Modal Header -->
+                          <div class="modal-header">
+                            <div class="col-11">
+                              <h4 class="modal-title text-center">Report</h4>
+                            </div>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <!-- Modal body -->
+                          <div class="modal-body">
+                            <form class ='form', method='POST' action = '{% url "report" %}'> {% csrf_token %}
+                              <input type='hidden' name ='comment_id' value='{{comment.id}}'/>
+                              <input type='hidden' name ='reported_id' value='{{comment.user_name}}'/>
+                              <!--<input name="short_reason" class="form-control mr-sm-2" type="text" placeholder="Short Reason" aria-label="Short Reason"> -->
+                              <select class="form-control" name="short_reason">
+                                <option value="" disabled selected>Select your option</option>
+                                <option value="spam">It's a spam</option>
+                                <option value="inappropriate">It's inappropriate</option>
+                              </select>
+                              <br>
+                              <input name="long_reason" class="form-control mr-sm-2" type="text" placeholder="More Detail" aria-label="More Detail">
+                              <br>
+                              <button class="btn btn-danger" style="float:right" type="submit" value="Submit"> Report   </button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                  <div class="card comment">
                   <div class="card-header bg-white">
                     

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "83abc4285f9df6f15198e11715cd612d4ad5e905719aef002feb6e6bd96495f4"
+            "sha256": "681f7c943360efe28ee0c02b28c9ece83ad60f49597b46108c37d0c74ba926f2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -132,13 +132,6 @@
             "index": "pypi",
             "version": "==0.40.0"
         },
-        "django-contrib-comments": {
-            "hashes": [
-                "sha256:b83320a86081a76bc0570e6cc0f924c0ced40b46ae9f5dd783ab2c745b449529",
-                "sha256:d1232bade3094de07dcc205fc833204384e71ba9d30caadcb5bb2882ce8e8d31"
-            ],
-            "version": "==1.9.2"
-        },
         "django-crispy-forms": {
             "hashes": [
                 "sha256:0afc0ba730f52a13c02bfbd0e1423af4577a337d73a8a0ef96f2cbbc5f345ffa",
@@ -154,14 +147,6 @@
             ],
             "index": "pypi",
             "version": "==1.4.0"
-        },
-        "django-threadedcomments": {
-            "hashes": [
-                "sha256:24d5c67b6b175c155d0c642e715de70602dbb3f6d9300532cbf954b22888554e",
-                "sha256:5a313a13ef02ee95f3818ee0b8eff64d58988edff48668de148b3751279c7ea3"
-            ],
-            "index": "pypi",
-            "version": "==1.2"
         },
         "future": {
             "hashes": [
