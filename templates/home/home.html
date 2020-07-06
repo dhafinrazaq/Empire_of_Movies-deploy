@@ -21,6 +21,8 @@
     <li class="page-item active" ><a href="{% url 'home'  %}" class="page-link">All</a></li>
     <li class="page-item"><a href="{% url 'home_login_discussion' %}" class="page-link">Following</a></li>
   </ul> 
+{%else%}
+  <p><a href="{% url 'account_login' %}">Login</a> to access more features </p>
 {%endif%}
 <ul class="pagination">
   <li class="page-item active" ><a href="{% url 'home'  %}" class="page-link">Discussion</a></li>

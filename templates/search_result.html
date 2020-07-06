@@ -4,32 +4,47 @@
 <div class="container">
     <h1>Search Results</h1>
 
-    <h2>User</h2>
-    <ul>
-        {% for user in user_list %}
-        <li><a href="{{ user.get_absolute_url }}">{{user.username}}</a></li>
-        {% endfor %}
-    </ul>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#user">User</button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#movie">Movie</button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#discussion">Discussion</button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#review">Review</button>
+    <div id="user" class="collapse in">
+        <h2>User </h2>
+        <ul>
+            {% for user in user_list %}
+            <li><a href="{{ user.get_absolute_url }}">{{user.username}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 
-    <h2>Movie</h2>
-    <ul>
-        {% for object in movie_list %}
-        <li><a href="{{ object.get_absolute_url }}">{{object.title}}</a></li>
-        {% endfor %}
-    </ul>
+
+    <div id="movie" class="collapse in">
+        <h2>Movie </h2>
+        <ul>
+            {% for object in movie_list %}
+            <li><a href="{{ object.get_absolute_url }}">{{object.title}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
     
-    <h2>Discussion</h2>
-    <ul>
-        {% for object in discussion_list %}
-        <li><a href="{{ object.movie.get_absolute_url }}">{{object.movie.title}}</a>: <a href="{{ object.get_absolute_url }}"> {{ object.title }}</a></li>
-        {% endfor %}
-    </ul>
-    
-    <h2>Review</h2>
-    <ul>
-        {% for object in review_list %}
-        <li><a href="{{ object.movie.get_absolute_url }}">{{object.movie.title}}</a>: <a href="{{ object.get_absolute_url }}"> {{ object.title }}</a></li>
-        {% endfor %}
-    </ul>
+
+    <div id="discussion" class="collapse in">
+        <h2>Discussion </h2>
+        <ul>
+            {% for object in discussion_list %}
+            <li><a href="{{ object.movie.get_absolute_url }}">{{object.movie.title}}</a>: <a href="{{ object.get_absolute_url }}"> {{ object.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <div id="review" class="collapse in">
+        <h2>Review </h2>
+        <ul>
+            {% for  object in review_list %}
+            <li><a href="{{ object.movie.get_absolute_url }}">{{object.movie.title}}</a>: <a href="{{ object.get_absolute_url }}"> {{ object.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock content %}

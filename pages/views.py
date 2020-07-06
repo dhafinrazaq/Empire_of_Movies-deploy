@@ -27,7 +27,7 @@ class HomePageLoginDiscussion(LoginRequiredMixin, TemplateView):
         discussion_list=[]
         for movie in user.follows.all():
             discussion_list.extend(list(movie.discussion.all()))
-        context['discussion_list'] = discussion_list
+        context['discussion_list'] = sorted(discussion_list, key = lambda x:x.date, reverse=True)
         return context
 
 class HomePageLoginReview(LoginRequiredMixin, TemplateView):
@@ -39,7 +39,7 @@ class HomePageLoginReview(LoginRequiredMixin, TemplateView):
         review_list=[]
         for movie in user.follows.all():
             review_list.extend(list(movie.review.all()))
-        context['review_list'] = review_list
+        context['review_list'] = sorted(review_list, key = lambda x:x.date, reverse=True)
         return context
 
     
