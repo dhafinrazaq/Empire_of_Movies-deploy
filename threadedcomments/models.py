@@ -17,6 +17,9 @@ class ThreadedComment(Comment):
 
     objects = CommentManager()
 
+    def get_absolute_url(self, anchor_pattern='#c%(id)s'):
+        return super().get_absolute_url(anchor_pattern=anchor_pattern)
+
     @property
     def depth(self):
         return len(self.tree_path.split(PATH_SEPARATOR))

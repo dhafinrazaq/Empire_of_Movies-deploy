@@ -12,6 +12,7 @@ from bot import telegram_bot_sendtext
 from django.contrib import messages
 from api import get_possible_movies
 import json
+from datetime import (datetime, timedelta)
 
 class SearchResultsListView(LoginRequiredMixin, TemplateView):
     template_name = 'search_result.html'
@@ -206,6 +207,26 @@ class MovieDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
+
+
+class MovieListViewTrending(LoginRequiredMixin, ListView):
+    model = Movie
+    template_name = 'movies/movie_list_trending.html'
+    login_url = 'account_login'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        MovieList = Movie.objects.all()
+        trending = {} 
+        for movie in MovieList:
+            today = datetime.now()
+            discussion_count = movie.discussion.filter(date__range=(today-timedelta(days=1), today)).count()
+            review_count = movie.review.filter(date__range=(today-timedelta(days=1), today)).count()
+            total_count = discussion_count + review_count
+            trending[movie] = total_count
+        trending_sorted = {k: v for k, v in reversed(sorted(trending.items(), key=lambda item: item[1]))}
+        context['movie_list'] = list(trending_sorted.keys())[:10]
+        return context
 
 ############################################################################################################
 class DiscussionDetailView(LoginRequiredMixin, DetailView):
