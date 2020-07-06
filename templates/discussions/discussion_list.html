@@ -44,7 +44,7 @@
               <div class="modal-body">
                 <form class ='form', method='POST' action = '{% url "report" %}'> {% csrf_token %}
                   <input type='hidden' name ='discussion_id' value='{{discussion.id}}'/>
-                  <input type='hidden' name ='reported_id' value='{{discussion.author.id}}'/>
+                  <input type='hidden' name ='reported_id' value='{{discussion.author.username}}'/>
                   <!--<input name="short_reason" class="form-control mr-sm-2" type="text" placeholder="Short Reason" aria-label="Short Reason"> -->
                   <select class="form-control" name="short_reason">
                     <option value="" disabled selected>Select your option</option>

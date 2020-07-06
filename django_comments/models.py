@@ -12,6 +12,9 @@ from .abstracts import (
 class Comment(CommentAbstractModel):
     class Meta(CommentAbstractModel.Meta):
         db_table = "django_comments"
+    
+    def __str__(self): 
+        return self.comment or ' '
 
 
 @python_2_unicode_compatible

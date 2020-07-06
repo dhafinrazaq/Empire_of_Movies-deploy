@@ -58,7 +58,7 @@
               <div class="modal-body">
                 <form class ='form', method='POST' action = '{% url "report" %}'> {% csrf_token %}
                   <input type='hidden' name ='discussion_id' value='{{discussion.id}}'/>
-                  <input type='hidden' name ='reported_id' value='{{discussion.author.id}}'/>
+                  <input type='hidden' name ='reported_id' value='{{discussion.author.username}}'/>
                   <!--<input name="short_reason" class="form-control mr-sm-2" type="text" placeholder="Short Reason" aria-label="Short Reason"> -->
                   <select class="form-control" name="short_reason">
                     <option value="" disabled selected>Select your option</option>
@@ -133,25 +133,70 @@
                 <ul>
               {% endif %}
             <li class="comment_li" id="c{{ comment.id }}">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
-                {% if comment.is_removed %}
-                  <p>[deleted]</p>
-                {% else %} 
+                    <div class="modal" id="report">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                        <!-- Modal Header -->
+                          <div class="modal-header">
+                            <div class="col-11">
+                              <h4 class="modal-title text-center">Report</h4>
+                            </div>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <!-- Modal body -->
+                          <div class="modal-body">
+                            <form class ='form', method='POST' action = '{% url "report" %}'> {% csrf_token %}
+                              <input type='hidden' name ='comment_id' value='{{comment.id}}'/>
+                              <input type='hidden' name ='reported_id' value='{{comment.user_name}}'/>
+                              <!--<input name="short_reason" class="form-control mr-sm-2" type="text" placeholder="Short Reason" aria-label="Short Reason"> -->
+                              <select class="form-control" name="short_reason">
+                                <option value="" disabled selected>Select your option</option>
+                                <option value="spam">It's a spam</option>
+                                <option value="inappropriate">It's inappropriate</option>
+                              </select>
+                              <br>
+                              <input name="long_reason" class="form-control mr-sm-2" type="text" placeholder="More Detail" aria-label="More Detail">
+                              <br>
+                              <button class="btn btn-danger" style="float:right" type="submit" value="Submit"> Report   </button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                  <div class="card comment">
-                  <div class="card-header">
+                  <div class="card-header bg-white">
                     
                       <div>
-                        <span> {{ comment.comment }}</span>
+                        <span> 
+                          {% if comment.is_removed %}
+                            [deleted]
+                          {% else %} 
+                            {{ comment.comment }}
+                          {% endif %}
+                        </span>
                       </div>
                   </div>
-                  <div class="card-footer">
+                  <div class="card-footer  bg-white">
                     <div class="row">
                       <div class="col">
                           <div class="dropdown dropright">
-                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"></button>
+                            <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown"></button>
                               
                               <div class="dropdown-menu">
                               {% if user.username == comment.user_name %}
-                                <a class="dropdown-item" href="{% url 'comments-delete' comment.pk %}">Delete</a>
+                                <div class="dropdown-item">
+                                  <form action="{% url 'comments-delete' comment.pk %}" method="post" style="background-color:white">{% csrf_token %}      
+                                      <input type="hidden" name="next" value="{{ discussion.get_absolute_url }}" />                                      
+                                        <button type="submit" class="btn btn-danger"> 
+                                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                          </svg>
+                                        </button>                                      
+                                  </form>
+                                </div>
+                                
                               {% endif %}
                                 <!-- Report start -->
                                 <a class="dropdown-item" data-toggle="modal" data-target="#report">Report</a>
@@ -166,7 +211,13 @@
                       </div>
                       <div class="col-auto row align-items-center mr-1">
                         <div class="align-self-center">
-                          <span><a href="{% url 'profile_following' comment.user_name %}">{{ comment.user_name }}</a> &middot; {{ comment.submit_date|timesince }} </span>
+                          <span>
+                            {% if comment.is_removed %}
+                              [deleted]
+                            {% else %} 
+                              <a href="{% url 'profile_following' comment.user_name %}">{{ comment.user_name }}</a> &middot; {{ comment.submit_date|timesince }} 
+                            {% endif %}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -194,7 +245,7 @@
                       </div>
                       
                   </div -->
-                {% endif %}
+                
                 {% for close in comment.close %}</li></ul>{% endfor %}
               
                 
@@ -203,11 +254,12 @@
         </div>
 
         <div id="wrap_write_comment" style="background-color:white">
-            <div id="form-comment" style="background-color:white">
+            <div id="form-comment" style="background-color:white; width:100%">
                 {% get_comment_form for object as form %}
                 <form action="/comments/post/" method="post" style="background-color:white">{% csrf_token %}
                     {{ form | crispy }}
                     <input type="hidden" value={{user.username}} name="name" maxlength="50" required="" id="id_name">
+                    <input type="hidden" name="title" value="{{ discussion.pk }}" />
                     <input type="hidden" name="next" value="{{ discussion.get_absolute_url }}" />
                     <p>
                       <button class="btn btn-success ml-2" type="submit">Submit</button>

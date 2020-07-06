@@ -9,6 +9,7 @@ import datetime
 from .forms import CustomUserChangeForm
 from articles.models import Discussion, Review, Comment
 from django.shortcuts import redirect
+from threadedcomments.models import ThreadedComment
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
@@ -77,7 +78,7 @@ class ProfileCommentView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         User = get_user_model()
         context['user_view'] = User.objects.get(username=self.kwargs.get('username'))
-        context['comments'] = Comment.objects.filter(author=context['user_view'])
+        context['comments'] = ThreadedComment.objects.filter(user_name=context['user_view'].username).filter(is_removed=False)
         return context
 
 class TelegramDisconnectView(LoginRequiredMixin, View):

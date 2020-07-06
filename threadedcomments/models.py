@@ -4,6 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from .compat import Comment, CommentManager
 
+from articles.models import (Discussion, Movie)
+
 PATH_SEPARATOR = getattr(settings, 'COMMENT_PATH_SEPARATOR', '/')
 PATH_DIGITS = getattr(settings, 'COMMENT_PATH_DIGITS', 10)
 
@@ -16,6 +18,29 @@ class ThreadedComment(Comment):
     newest_activity = models.DateTimeField(null=True)
 
     objects = CommentManager()
+
+    def __str__(self): 
+        return self.comment or ' '
+    
+    def get_absolute_url(self, anchor_pattern='#c%(id)s'):
+        return super().get_absolute_url(anchor_pattern=anchor_pattern)
+
+    def get_discussion_url(self):
+        discussion = Discussion.objects.get(pk=self.title)
+        return discussion.get_absolute_url()
+
+    def get_discussion_title(self):
+        discussion = Discussion.objects.get(pk=self.title)
+        return discussion.title
+
+    def get_movie_url(self):
+        movie = Discussion.objects.get(pk=self.title).movie
+        return movie.get_absolute_url()
+
+    def get_movie_title(self):
+        movie = Discussion.objects.get(pk=self.title).movie
+        return movie.title
+        
 
     @property
     def depth(self):

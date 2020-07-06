@@ -18,7 +18,6 @@ whitenoise = "==5.1.0"
 python-telegram-bot = "==12.7"
 django-social-share = "==1.4.0"
 django-allauth = "==0.40.0"
-django-threadedcomments = "==1.2"
 
 [requires]
 python_version = "3.8"
