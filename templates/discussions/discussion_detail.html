@@ -259,6 +259,7 @@
                 <form action="/comments/post/" method="post" style="background-color:white">{% csrf_token %}
                     {{ form | crispy }}
                     <input type="hidden" value={{user.username}} name="name" maxlength="50" required="" id="id_name">
+                    <input type="hidden" name="title" value="{{ discussion.pk }}" />
                     <input type="hidden" name="next" value="{{ discussion.get_absolute_url }}" />
                     <p>
                       <button class="btn btn-success ml-2" type="submit">Submit</button>
