@@ -12,7 +12,7 @@
 
 <ul class="list-group">
 {% for comment in comments %}
-<li class="list-group-item"><a class="text-dark" href="{{ comment.get_absolute_url }}"><strong>{{comment.comment}}</strong></a> &middot; <a class="text-dark" href="{{ comment.get_absolute_url }}">{{comment.discussion.title}}</a> &middot; <a class="text-dark" href="{{ comment.discussion.movie.get_absolute_url }}">{{comment.discussion.movie.title}}</a></li>
+<li class="list-group-item"><a class="text-dark" href="{{ comment.get_absolute_url }}"><strong>{{comment.comment}}</strong></a> &middot; <a class="text-dark" href="{{ comment.get_discussion_url }}">{{comment.get_discussion_title}}</a> &middot; <a class="text-dark" href="{{ comment.get_movie_url }}">{{comment.get_movie_title }}</a></li>
 {% endfor %}
 </ul><s
 </div>

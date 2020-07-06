@@ -208,7 +208,6 @@ class MovieDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         obj = self.get_object()
         return obj.author == self.request.user
 
-
 class MovieListViewTrending(LoginRequiredMixin, ListView):
     model = Movie
     template_name = 'movies/movie_list_trending.html'

@@ -1,5 +1,6 @@
 from django.db import models
 from articles.models import Discussion, Review, Comment
+from threadedcomments.models import ThreadedComment
 from django.contrib.auth import get_user_model
 
 class Report(models.Model):
@@ -33,7 +34,7 @@ class Report(models.Model):
         null=True,
     )
     comment = models.ForeignKey(
-        Comment,
+        ThreadedComment,
         default=None,
         on_delete=models.CASCADE,
         related_name='comment_report',
@@ -42,7 +43,7 @@ class Report(models.Model):
     )
     
     def __str__(self): 
-        return self.short_reason
+        return self.short_reason or ' '
 
     @classmethod
     def create(self, reported, reporter, short_reason, long_reason, discussion, review, comment):

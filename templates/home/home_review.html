@@ -3,20 +3,18 @@
 {% block title %}Review{% endblock title %}
 
 {% block content %}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb"> 
-    <li class="breadcrumb-item"><a href = "{%url 'movie_list' %}"> Movies  </a> </li>
-    <li class="breadcrumb-item"><a href = "{%url 'movie_detail' movie_pk%}"> {{movie_name}}  </a> </li>
-    <li class="breadcrumb-item active"> Review </li>
-  </ol>
-</nav>
-  <form class ='form'  action = '{% url "review_new" movie_pk %}'> {% csrf_token %}
-                    <button class='btn btn-primary'>
-                    New Review for {{movie_name}}
-                    </button>&ensp;
-  </form>
-  <br>
-  {% for review in object_list %}
+
+{% if user.is_authenticated%}
+  <ul class="pagination">
+    <li class="page-item active" ><a href="{% url 'home'  %}" class="page-link">All</a></li>
+    <li class="page-item "><a href="{% url 'home_login_review' %}" class="page-link">Following</a></li>
+  </ul> 
+{%endif%}
+<ul class="pagination">
+  <li class="page-item" ><a href="{% url 'home'  %}" class="page-link">Discussion</a></li>
+  <li class="page-item active"><a href="{% url 'home_review' %}" class="page-link">Review</a></li>
+</ul> 
+  {% for review in review_list %}
   <!-- Modal Header -->
   <div class="modal" id="report">
           <div class="modal-dialog">
@@ -55,6 +53,7 @@
             <div class="col row align-items-center ml-1">
               <div class="align-self-center">
                 <span class="font-weight-bold"> <a href="{% url 'review_detail' review.movie.pk review.pk%}">{{ review.title }}</a></span> &middot;
+                <span><a href="{{review.movie.get_absolute_url}}">{{review.movie.title}}</a></span> &middot;
                 <span><a href="{{ review.author.get_absolute_url }}">{{ review.author }}</a> &middot; {{ review.date|timesince }}</span>
               </div>
             </div>
