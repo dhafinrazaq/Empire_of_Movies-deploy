@@ -47,3 +47,6 @@ class HomePageLoginReview(LoginRequiredMixin, TemplateView):
 
 class PrivacyPolicyView(TemplateView):
     template_name = 'privacy_policy.html'
+
+class  UserGuideView(TemplateView):
+    template_name = 'user_guide.html'

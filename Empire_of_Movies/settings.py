@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%-#u&bhr_31k901s6vf6ktiax9x!_(efmh6-n*!5w6joqgz#fa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'empire-of-movies.herokuapp.com', '0.0.0.1']
 
@@ -162,6 +162,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'#location where django collect all static files
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    # '/var/www/static/',
+]
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
