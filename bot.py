@@ -87,4 +87,4 @@ dispatcher.add_handler(unknown_handler)
 
 updater.start_polling()
 
-updater.idle()
+# updater.idle()

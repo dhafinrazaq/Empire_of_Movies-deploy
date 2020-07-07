@@ -100,24 +100,24 @@ DATABASES = {
     #     'PORT': '5432',
     # }
 
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'empire2',
-        'USER': 'postgres',
-        'PASSWORD': 'gilbert19',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-    
-
-    # 'default': {
+    #     'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'empire_of_movies',
-    #     'USER': 'dhafinrazaq',
-    #     'PASSWORD': '123',
+    #     'NAME': 'empire2',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'gilbert19',
     #     'HOST': '127.0.0.1',
     #     'PORT': '5432',
     # }
+    
+
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'empire_of_movies',
+        'USER': 'dhafinrazaq',
+        'PASSWORD': '123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
 
 }
 db_from_env = dj_database_url.config(conn_max_age=600)
@@ -167,6 +167,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     # '/var/www/static/',
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
