@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.urls import (path, re_path)
 from django.contrib.contenttypes.views import shortcut
 
 from .views.comments import post_comment, comment_done
@@ -16,6 +17,7 @@ urlpatterns = [
     url(r'^deleted/$', delete_done, name='comments-delete-done'),
     url(r'^approve/(\d+)/$', approve, name='comments-approve'),
     url(r'^approved/$', approve_done, name='comments-approve-done'),
-
-    url(r'^cr/(\d+)/(.+)/$', shortcut, name='comments-url-redirect'),
+    re_path(r'^cr/(\d+)/(.+)/$', shortcut, name='comments-url-redirect'), 
+    # url(r'^cr/(\d+)/(.+)/$', shortcut, name='comments-url-redirect'),
+    # path('cr/<int:content_type_id>/<int:object_id>/', shortcut, name='comments-url-redirect'),
 ]

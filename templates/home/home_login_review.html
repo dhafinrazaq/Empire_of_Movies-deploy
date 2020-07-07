@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Review{% endblock title %}
+
+{% block content %}
+<ul class="pagination">
+  <li class="page-item " ><a href="{% url 'home_review'  %}" class="page-link">All</a></li>
+  <li class="page-item active"><a href="{% url 'home_login_discussion' %}" class="page-link">Following</a></li>
+</ul> 
+
+<ul class="pagination">
+  <li class="page-item" ><a href="{% url 'home_login_discussion'  %}" class="page-link">Discussion</a></li>
+  <li class="page-item active"><a href="{% url 'home_login_review' %}" class="page-link">Review</a></li>
+</ul> 
+  {% for review in review_list %}
+  <!-- Modal Header -->
+  <div class="modal" id="report">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="col-11">
+                  <h4 class="modal-title text-center">Report</h4>
+                </div>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form class ='form', method='POST' action = '{% url "report" %}'> {% csrf_token %}
+                  <input type='hidden' name ='review_id' value='{{review.id}}'/>
+                  <input type='hidden' name ='reported_id' value='{{review.author.username}}'/>
+                  <!--<input name="short_reason" class="form-control mr-sm-2" type="text" placeholder="Short Reason" aria-label="Short Reason"> -->
+                  <select class="form-control" name="short_reason">
+                    <option value="" disabled selected>Select your option</option>
+                    <option value="spam">It's a spam</option>
+                    <option value="inappropriate">It's inappropriate</option>
+                  </select>
+                  <br>
+                  <input name="long_reason" class="form-control mr-sm-2" type="text" placeholder="More Detail" aria-label="More Detail">
+                  <br>
+                  <button class="btn btn-danger" style="float:right" type="submit" value="Submit"> Report   </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <div class="card">
+      <div class="card-header">
+          <div class="row">
+          
+            <div class="col row align-items-center ml-1">
+              <div class="align-self-center">
+                <span class="font-weight-bold"> <a href="{% url 'review_detail' review.movie.pk review.pk%}">{{ review.title }}</a></span> &middot;
+                <span><a href="{{review.movie.get_absolute_url}}">{{review.movie.title}}</a></span> &middot;
+                <span><a href="{{ review.author.get_absolute_url }}">{{ review.author }}</a> &middot; {{ review.date|timesince }}</span>
+              </div>
+            </div>
+            <div class="col-auto">
+                  <div class="dropdown dropright">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"></button>
+                      
+                      <div class="dropdown-menu">
+                      {% if user == review.author %}
+                        <a class="dropdown-item" href="{% url 'review_edit' review.movie.pk review.pk %}">Edit</a> 
+                        <a class="dropdown-item" href="{% url 'review_delete' review.movie.pk review.pk %}">Delete</a>
+                      {% endif %}
+                        <!-- Report start -->
+                        <a class="dropdown-item" data-toggle="modal" data-target="#report">Report</a>
+                      
+                      </div>
+                  </div>
+                  
+            </div>
+          </div>
+        </div>
+      <div class="card-body">
+        <p>{{ review.body }}</p>
+      </div>
+    </div>
+    <br />
+  {% endfor %}
+{% endblock content %}

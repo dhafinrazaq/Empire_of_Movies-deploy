@@ -14,9 +14,8 @@ from api import get_possible_movies
 import json
 from datetime import (datetime, timedelta)
 
-class SearchResultsListView(LoginRequiredMixin, TemplateView):
+class SearchResultsListView(TemplateView):
     template_name = 'search_result.html'
-    login_url = 'account_login'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -12,9 +12,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%-#u&bhr_31k901s6vf6ktiax9x!_(efmh6-n*!5w6joqgz#fa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'empire-of-movies.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'empire-of-movies.herokuapp.com', '0.0.0.1']
 
 
 # Application definition
@@ -100,24 +100,24 @@ DATABASES = {
     #     'PORT': '5432',
     # }
 
-    #     'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'empire2',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'gilbert19',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '5432',
-    # }
-    
-
-    'default': {
+        'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'empire_of_movies',
-        'USER': 'dhafinrazaq',
-        'PASSWORD': '123',
+        'NAME': 'empire2',
+        'USER': 'postgres',
+        'PASSWORD': 'gilbert19',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
+    
+
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'empire_of_movies',
+    #     'USER': 'dhafinrazaq',
+    #     'PASSWORD': '123',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '5432',
+    # }
 
 }
 db_from_env = dj_database_url.config(conn_max_age=600)
@@ -162,6 +162,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'#location where django collect all static files
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    # '/var/www/static/',
+]
 
 AUTH_USER_MODEL = 'users.CustomUser'
 

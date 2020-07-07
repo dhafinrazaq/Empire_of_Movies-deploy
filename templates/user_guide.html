@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}User Guide{% endblock title %}
+{% block content %}
+<h2><span style="font-weight: 400;">Sign Up</span></h2>
+<img src="{% static "SignUp.png" %}" width="75%" alt="Sign Up ">
+<hr>
+<h2><span style="font-weight: 400;">Login</span></h2>
+<img src="{% static "Login.png" %}" width="75%" alt="Log In ">
+<hr>
+<h2><span style="font-weight: 400;">Request movie</span></h2>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Enter the movie title and year (optional) if the movie isn&rsquo;t available on the website yet</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Click on Submit</span></li>
+</ul>
+<img src="{% static "Request.png" %}" width="75%" alt="Request ">
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">The list of possible movies will appear</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Click on the movie you want to be added</span></li>
+</ul>
+<img src="{% static "RequestList.png" %}" width="75%" alt="Request List ">
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">It will be available on the website (with information about the movie), and you can follow, create a discussion thread, or post&nbsp; a review</span></li>
+</ul>
+<img src="{% static "RequestResult.png" %}" width="75%" alt="Request Result ">
+<hr>
+<h2><span style="font-weight: 400;">Follow movie</span></h2>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Click on the follow button to follow a movie</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">It will appear on the &ldquo;Followed&rdquo; page</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">You will be notified when a new discussion thread or review is posted</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Click on the Unfollow button to unfollow a movie</span></li>
+</ol>
+<img src="{% static "Follow.png" %}" width="75%" alt="Sign Up ">
+<hr>
+<h2><span style="font-weight: 400;">List of available movies</span></h2>
+<img src="{% static "ListOfAvailableMovies.png" %}" width="75%" alt="Available Movies ">
+<hr>
+<h2><span style="font-weight: 400;">List of followed movies</span></h2>
+<img src="{% static "ListOfFollowedMovies.png" %}" width="75%" alt="Followed Movies ">
+<hr>
+<h2><span style="font-weight: 400;">Connect to Telegram&nbsp;</span></h2>
+<p><span style="font-weight: 400;">Connect to Telegram to be notified via a telegram bot when a new discussion thread or review of a movie you follow is posted</span></p>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Follow the instruction on the web</span></li>
+</ol>
+<img src="{% static "Connect.png" %}" width="75%" alt="Connect to Telegram ">
+<hr>
+<h2><span style="font-weight: 400;">Discussion</span></h2>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Discussion page to discuss about the film</span></p>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Click on the &ldquo;New discussion&rdquo; button to create a discussion thread. You can edit or delete the discussion you created later</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">You can upvote or downvote a discussion thread if you find it interesting to make it appear on top of the page if you sort it by &ldquo;Top&rdquo;</span></li>
+</ol>
+<img src="{% static "Discussion.png" %}" width="75%" alt="Discussion">
+<hr>
+<h2><span style="font-weight: 400;">Report &amp; Comment</span></h2>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">If you find that a particular discussion is a spam or inappropriate, please report it by pressing the &ldquo;Report&rdquo; button, and a prompt will appear for you to state the reason</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">You will be able to interact with other users via the comment section on the discussion thread</span></li>
+</ol>
+<img src="{% static "Report.png" %}" width="75%" alt="Report and Comment">
+<hr>
+<h2><span style="font-weight: 400;">Review</span></h2>
+<p><span style="font-weight: 400;">You can give a review about a film</span></p>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">You can see all reviews about the film or create a new one</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">To create a review, click on the &ldquo;New Review&rdquo; button</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">You can fill in your review</span></li>
+</ol>
+<img src="{% static "Review.png" %}" width="75%" alt="Review">
+<img src="{% static "ReviewDetail.png" %}" width="75%" alt="Review Detail ">
+<hr>
+<h2><span style="font-weight: 400;">Web notification</span></h2>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">If there is new notification, the notification button will turn red and if you clear all of the notifications, it will be white-colored</span></li>
+</ol>
+<img src="{% static "WebNotif.png" %}" width="75%" alt="Website Notification ">
+<hr>
+<h2><span style="font-weight: 400;">Telegram notification</span></h2>
+<p><span style="font-weight: 400;">You must have previously followed the instruction on the &ldquo;Connect to Telegram&rdquo; page</span></p>
+<p><span style="font-weight: 400;">If a movie you followed has a new discussion or review, you will be notified via a telegram bot</span></p>
+<p>&nbsp;</p>
+<img src="{% static "TelegramNotif.png" %}" width="75%" alt="Telegram Notification ">
+<hr>
+<h2><span style="font-weight: 400;">Search Bar and Result</span></h2>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">You can use the search bar with &ldquo;Filter by&rdquo; feature</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Here is an example of a search query with filter</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">The search result will appear</span></li>
+</ol>
+<img src="{% static "Search.png" %}" width="75%" alt="Search">
+<img src="{% static "SearchResult.png" %}" width="75%" alt="Search Result">
+<p><br /><br /></p>
+{% endblock content %}
