@@ -28,12 +28,9 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic', 
     'django.contrib.staticfiles',
     
-    
     'django_comments',
     'threadedcomments',
     
-
-
     'django.contrib.sites', 
     'users.apps.UsersConfig',
     'report.apps.ReportConfig',
