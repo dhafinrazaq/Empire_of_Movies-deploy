@@ -480,7 +480,7 @@ class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class ReviewEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review
-    fields =('body',)
+    fields =('body','rating')
     template_name = 'reviews/review_edit.html'
     login_url ='account_login'
 
