@@ -11,7 +11,7 @@
 
   
   {% for discussion in object_list %}
-        <div class="modal" id="report">
+        <div class="modal" id="report{{discussion.pk}}">
           <div class="modal-dialog">
             <div class="modal-content">
             <!-- Modal Header -->
@@ -62,7 +62,7 @@
                       <a class="dropdown-item" href="{% url 'discussion_delete' discussion.movie.pk discussion.pk %}">Delete</a>
                     {% endif %}
                       <!-- Report start -->
-                      <a class="dropdown-item" data-toggle="modal" data-target="#report">Report</a>
+                      <a class="dropdown-item" data-toggle="modal" data-target="#report{{discussion.pk}}">Report</a>
                     
                     </div>
                 </div>

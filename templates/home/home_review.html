@@ -18,7 +18,7 @@
 </ul> 
   {% for review in review_list %}
   <!-- Modal Header -->
-  <div class="modal" id="report">
+  <div class="modal" id="report{{review.pk}}">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -69,7 +69,7 @@
                         <a class="dropdown-item" href="{% url 'review_delete' review.movie.pk review.pk %}">Delete</a>
                       {% endif %}
                         <!-- Report start -->
-                        <a class="dropdown-item" data-toggle="modal" data-target="#report">Report</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#report{{review.pk}}">Report</a>
                       
                       </div>
                   </div>
