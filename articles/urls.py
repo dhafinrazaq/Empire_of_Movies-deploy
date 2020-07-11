@@ -5,6 +5,7 @@ from .views import ReviewDetailView, ReviewEditView, ReviewDeleteView, ReviewCre
 from .views import FollowMovieView, UpvoteDiscussionView, DownvoteDiscussionView
 from .views import SearchResultsListView, DiscussionListViewTrending
 from .views import CommentDetailView, CommentCreateView, CommentDeleteView, CommentEditView
+from .views import NewDiscussionView, NewReviewView
 
 urlpatterns = [
     path('follow/', FollowMovieView.as_view(), name ='follow'),
@@ -21,6 +22,9 @@ urlpatterns = [
     path('search/', SearchResultsListView.as_view(), name='search_results'),
     path('', MovieFollowedTitleView.as_view(), name='movie_followed'),
     path('followedlatest/', MovieFollowedLatestView.as_view(), name='movie_followed_latest'),
+
+    path('new_discussion/', NewDiscussionView.as_view(), name='new_discussion'),
+    path('new_review/', NewReviewView.as_view(), name='new_review'),
 
     path('upvote_discussion/', UpvoteDiscussionView.as_view(), name ='upvote_discussion'),
     path('downvote_discussion/', DownvoteDiscussionView.as_view(), name ='downvote_discussion'),

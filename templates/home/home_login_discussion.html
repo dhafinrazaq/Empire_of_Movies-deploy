@@ -25,6 +25,9 @@
   <li class="page-item active" ><a href="{% url 'home_login_discussion'  %}" class="page-link">Discussion</a></li>
   <li class="page-item"><a href="{% url 'home_login_review' %}" class="page-link">Review</a></li>
 </ul> 
+
+{% include "home/new_discussion_modal.html" %}
+
   {% for discussion in discussion_list %}
         <div class="modal" id="report{{discussion.pk}}">
           <div class="modal-dialog">

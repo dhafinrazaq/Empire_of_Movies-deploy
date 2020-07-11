@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from articles.models import Discussion, Review
+from articles.models import Discussion, Review, Movie
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class HomePageDiscussion(TemplateView):
@@ -8,6 +8,7 @@ class HomePageDiscussion(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['discussion_list'] = Discussion.objects.all().order_by('-date')
+        context['movie_list'] = Movie.objects.all()
         return context
 
 class HomePageReview(TemplateView):
@@ -16,6 +17,7 @@ class HomePageReview(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['review_list'] = Review.objects.all().order_by('-date')
+        context['movie_list'] = Movie.objects.all()
         return context
 
 class HomePageLoginDiscussion(LoginRequiredMixin, TemplateView):
@@ -28,6 +30,7 @@ class HomePageLoginDiscussion(LoginRequiredMixin, TemplateView):
         for movie in user.follows.all():
             discussion_list.extend(list(movie.discussion.all()))
         context['discussion_list'] = sorted(discussion_list, key = lambda x:x.date, reverse=True)
+        context['movie_list'] = Movie.objects.all()
         return context
 
 class HomePageLoginReview(LoginRequiredMixin, TemplateView):
@@ -40,6 +43,7 @@ class HomePageLoginReview(LoginRequiredMixin, TemplateView):
         for movie in user.follows.all():
             review_list.extend(list(movie.review.all()))
         context['review_list'] = sorted(review_list, key = lambda x:x.date, reverse=True)
+        context['movie_list'] = Movie.objects.all()
         return context
 
     

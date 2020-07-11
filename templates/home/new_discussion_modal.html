@@ -1,0 +1,28 @@
+<div class="modal" id="new_discussion">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="col-11">
+          <h4 class="modal-title text-center">New Discussion</h4>
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form class='form', method='post' action="{% url 'new_discussion' %}"> {% csrf_token %}
+          <input name="title" class="form-control mr-sm-2" type="text" placeholder="Title" aria-label="Title">
+          <br>
+          <textarea name="body" class="form-control mr-sm-2" rows="10" type="text" placeholder="Body" aria-label="Body"></textarea>
+          <br>
+          <select name="movie_pk" class="selectpicker" data-live-search="true">
+            {% for movie in movie_list_base %}
+              <option value="{{movie.pk}}" data-tokens="{{movie.title}}">{{movie.title}}</option>
+            {% endfor %}
+          </select>
+          <button class="btn btn-primary" style="float:right" type="submit" value="Submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

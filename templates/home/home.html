@@ -29,6 +29,8 @@
   <li class="page-item"><a href="{% url 'home_review' %}" class="page-link">Review</a></li>
 </ul> 
 
+{% include "home/new_discussion_modal.html" %}
+
 
   {% for discussion in discussion_list %}
         <div class="modal" id="report{{discussion.pk}}">

@@ -1,0 +1,38 @@
+<div class="modal" id="new_review">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="col-11">
+          <h4 class="modal-title text-center">New Review</h4>
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form class='form', method='post' action="{% url 'new_review' %}"> {% csrf_token %}
+          <input name="title" class="form-control mr-sm-2" type="text" placeholder="Title" aria-label="Title">
+          <br>
+          <textarea rows="10" name="body" class="form-control mr-sm-2"  type="text" placeholder="Body" aria-label="Body"></textarea>
+          <br>
+          <input name="rating" class="form-control mr-sm-2" type="number" placeholder="Rating" min="1" max="10" aria-label="Rating">
+          <br>
+          <select name="movie_pk" class="selectpicker" data-live-search="true">
+            {% for movie in movie_list_base %}
+              <option value="{{movie.pk}}" data-tokens="{{movie.title}}">{{movie.title}}</option>
+            {% endfor %}
+          </select>
+          <button class="btn btn-primary" style="float:right" type="submit" value="Submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} <div style="position:fixed;bottom:50px;right:50px;margin:0;padding:5px 3px; z-index: 10">
+<button type="button" class="btn text-success" data-toggle="modal" data-target="#new_review">
+    <svg width="100px" height="100px" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"/>
+</svg>
+  </button>
+</div>  {% endcomment %}

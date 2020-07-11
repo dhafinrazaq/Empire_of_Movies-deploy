@@ -67,6 +67,10 @@ class Discussion(models.Model):
         null=True,
     )
     
+    @classmethod
+    def create(self, movie, title, body, author):
+        discussion = self(title=title, author=author, body=body, movie=movie)
+        return discussion
 
     def __str__(self): 
         return self.title or ' '
@@ -97,6 +101,11 @@ class Review(models.Model):
         null=True, 
         blank=True
     )
+
+    @classmethod
+    def create(self, movie, title, body, rating, author):
+        review = self(title=title, author=author, body=body, rating=rating, movie=movie)
+        return review
 
     def __str__(self): 
         return self.title or ' '

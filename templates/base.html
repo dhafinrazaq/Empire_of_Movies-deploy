@@ -9,12 +9,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
   <style>
-  
-  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
-    width: 50px;
-  }
+    
+    #filter .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+      width: 50px;
+    }
 
-    .bootstrap-select .dropdown-toggle .filter-option {
+    #filter .bootstrap-select .dropdown-toggle .filter-option {
     position: absolute;
     top: 0;
     left: 0;
@@ -26,13 +26,16 @@
     width: 0%;
     text-align: left;
     }
-    .bootstrap-select > .dropdown-toggle {
+
+    #filter .bootstrap-select > .dropdown-toggle {
     position: relative;
     width: 50px;
     z-index: 1;
     text-align: center;
     white-space: nowrap;
     }
+
+    
 
     /* BEGIN COMMENTS */
 
@@ -136,13 +139,16 @@
 
 </head>
 <body>
+{% include "home/new_review_modal.html"%}
+{% include "home/new_discussion_modal.html"%}
+
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
   <a class="navbar-brand" href="{% url 'home' %}">Empire of Movies</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>  
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <form class="form-inline" action="{% url 'search_results' %}" method="get">
+      <form class="form-inline" action="{% url 'search_results' %}" method="get" id="filter">
         <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
           <select name="filter" class="selectpicker" multiple placeholder="Filter By:">
             <option value="user_search" selected>User</option>
@@ -156,10 +162,26 @@
       </form>
     {% if user.is_authenticated %}
       <ul class="navbar-nav mx-auto">
+
         <li class="nav-item"><a class="nav-link" href="{% url 'movie_followed' %}">Followed Movies</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'movie_list' %}">All Movies</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'movie_trending' %}">Today's Top 10 Movies</a></li>
         <li class="nav-item"><a class="nav-link" href="{%url 'movie_request'%}"> Request Movie </a> </li>
+        <li class="nav-item dropdown">
+        
+
+          <a class="nav-link text-white" href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right">
+            <a data-toggle="modal" data-target="#new_discussion" class="dropdown-item">New Discussion</a>
+            <a data-toggle="modal" data-target="#new_review" class="dropdown-item">New Review</a>
+          </div>
+        </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li><a class="nav-link" href="{% url 'telegram_otp'%}">Connect to Telegram</a></li>

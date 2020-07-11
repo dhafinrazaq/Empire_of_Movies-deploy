@@ -16,6 +16,9 @@
   <li class="page-item" ><a href="{% url 'home'  %}" class="page-link">Discussion</a></li>
   <li class="page-item active"><a href="{% url 'home_review' %}" class="page-link">Review</a></li>
 </ul> 
+
+{% include "home/new_review_modal.html" %}
+
   {% for review in review_list %}
   <!-- Modal Header -->
   <div class="modal" id="report{{review.pk}}">

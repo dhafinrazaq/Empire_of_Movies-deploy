@@ -273,7 +273,7 @@ class DiscussionCreateView(LoginRequiredMixin, CreateView):
         super().post(request, *args, **kwargs)
         current_movie = Movie.objects.get(pk=self.kwargs.get('movie_pk'))
         all_followers = current_movie.all_followers()
-        title = "New Discussion for"
+        title = "New discussion for"
         print(self.object.get_absolute_url())
         notification = Notification.create(title=title, movie=current_movie, inside=self.object)
         notification.save()
@@ -442,7 +442,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         super().post(request, *args, **kwargs)
         current_movie = Movie.objects.get(pk=self.kwargs.get('movie_pk'))
         all_followers = current_movie.all_followers()
-        title = "New Review for"
+        title = "New review for"
         print(self.object.get_absolute_url())
         notification = Notification.create(title=title, movie=current_movie, inside=self.object)
         notification.save()
@@ -590,4 +590,52 @@ class CommentEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return context
     def get_success_url(self):
         return reverse_lazy('discussion_detail', kwargs={'movie_pk': self.kwargs.get('movie_pk'), 'discussion_pk':self.kwargs.get('discussion_pk')})
+
+######################################################################################################################################################################################
+class NewDiscussionView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        #print(request.POST)
+        movie = Movie.objects.get(pk=request.POST.get("movie_pk"))
+        title = request.POST.get("title")
+        body = request.POST.get("body")
+        author = self.request.user
+
+        discussion = Discussion.create(movie=movie, title=title, body=body, author=author)
+        discussion.save()
+
+        notification = Notification.create(title="New discussion for ", movie=movie, inside=discussion)
+        notification.save()
+
+        all_followers = movie.all_followers()
+        for follower in all_followers:
+            if (notification not in follower.notifications.all()):
+                follower.notifications.add(notification)
+            if (follower.chat_id):
+                telegram_bot_sendtext(follower.chat_id, "New discussion for " + notification.movie_title + " with title " + notification.inside_title, "empire-of-movies.herokuapp.com" + notification.inside_link)
+        
+        return redirect(discussion)
+    
+class NewReviewView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        #print(request.POST)
+        movie = Movie.objects.get(pk=request.POST.get("movie_pk"))
+        title = request.POST.get("title")
+        body = request.POST.get("body")
+        rating = request.POST.get("rating")
+        author = self.request.user
+
+        review = Review.create(movie=movie, title=title, body=body, author=author, rating=rating)
+        review.save()
+
+        notification = Notification.create(title="New review for ", movie=movie, inside=review)
+        notification.save()
+
+        all_followers = movie.all_followers()
+        for follower in all_followers:
+            if (notification not in follower.notifications.all()):
+                follower.notifications.add(notification)
+            if (follower.chat_id):
+                telegram_bot_sendtext(follower.chat_id, "New review for " + notification.movie_title + " with title " + notification.inside_title, "empire-of-movies.herokuapp.com" + notification.inside_link)
+        
+        return redirect(review)
     
