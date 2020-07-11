@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Connect to Telegram{% endblock %}
 {% block content %}
-<div class="container" ">
+<div class="container">
     <h1>Connect to Telegram</h1>
-    {% if user.telegram_id%}
+    {% if user.telegram_id %}
         <p> You are already connected to a Telegram account.</p> 
         <p>If you want to change the telegram account linked, you can use <code>/logout</code> or press the button below.  
             <form class ='form', method='POST' action = '{% url "disconnect_telegram" %}'> {% csrf_token %}
@@ -13,12 +13,18 @@
             </form>
         </p>
     {%else%}
-        <p>You will receive notifications when there is a new discussion or review for a movie you follow.</p>
+        <p>You will receive notifications when there is a new discussion or review for a movie you follow. To connect:</p>
+        
         <ol>
-            <li>Add <code>EmpireOfMoviesbot</code> on Telegram</li>
-            <li>Send the command <code>/start</code></li>
-            <li>Send the command <code>/login {{user.username}} {{OTP}}</code></li>
-            <li>You should receive <cite>You are logged in </cite></li>
+            <li>Open you telegram app</li>
+            <li>Search and add <code>EmpireOfMoviesbot</code> on Telegram</li>
+            <li>On the chat room:
+                <ol>
+                    <li>Send the command <code>/start</code> or press "Start" button at the bottom of the chat room</li>
+                    <li>Send the command <code>/login {{user.username}} {{OTP}}</code></li>
+                    <li>You should receive <cite>You are logged in </cite>if you have successfully connected your Telegram account, or other message if failed</li>
+                </ol>
+            </li>
         </ol>
     {% endif %}
 </div>

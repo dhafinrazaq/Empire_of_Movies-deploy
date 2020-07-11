@@ -24,22 +24,23 @@ def login(update, context):
     args_array = ' '.join(context.args).split(' ')
     website_id = args_array[0]
     entered_otp = args_array[1]
-    if (CustomUser.objects.get(username=website_id)):
-        telegram_id = update.message.chat.username
-        chat_id = update.message.chat.id
-        if (CustomUser.objects.filter(telegram_id=telegram_id).count() > 0):
-            context.bot.send_message(chat_id=update.effective_chat.id, text="You need to logout from your previous telegram by sending /logout")
-        else:
-            user = CustomUser.objects.get(username=website_id)
-            real_otp = user.OTP
-            if (real_otp == int(entered_otp)):
-                user.telegram_id = telegram_id
-                user.chat_id = chat_id
-                user.save()
-                context.bot.send_message(chat_id=update.effective_chat.id, text="You are logged in")
+    try:
+        if (CustomUser.objects.get(username=website_id)):
+            telegram_id = update.message.chat.username
+            chat_id = update.message.chat.id
+            if (CustomUser.objects.filter(telegram_id=telegram_id).count() > 0):
+                context.bot.send_message(chat_id=update.effective_chat.id, text="You need to logout from your previous telegram by sending /logout")
             else:
-                context.bot.send_message(chat_id=update.effective_chat.id, text=str(real_otp) + " " + str(entered_otp))
-    else:
+                user = CustomUser.objects.get(username=website_id)
+                real_otp = user.OTP
+                if (real_otp == int(entered_otp)):
+                    user.telegram_id = telegram_id
+                    user.chat_id = chat_id
+                    user.save()
+                    context.bot.send_message(chat_id=update.effective_chat.id, text="You are logged in")
+                else:
+                    context.bot.send_message(chat_id=update.effective_chat.id, text="You entered the wrong OTP")
+    except:
         context.bot.send_message(chat_id=update.effective_chat.id, text="You entered a wrong username")
 
 def logout(update, context):
