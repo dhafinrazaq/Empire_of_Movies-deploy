@@ -51,6 +51,7 @@
     </div>
       <div class="col-sm-8" style="float:right">
         <p>{{ object.synopsis }}</p>
+        <p> <strong>Empire of Movies Rating: </strong> {{website_rating}}
         {% if object.genres%}
           <p> <strong>Genre:</strong> {{object.genres}} </p>
         {%endif%}

@@ -2,6 +2,21 @@ import requests
 import json
 import ast
 
+def get_imdb_rating(id):
+        imdb_api_url = "https://imdb-api1.p.rapidapi.com/Title/k_7z9iNr0H/" + id
+        headers = {
+            'x-rapidapi-host': "imdb-api1.p.rapidapi.com",
+            'x-rapidapi-key': "2f744174a8msh81a79fd4c738d7dp1b81e4jsn0ce24b827fa5"
+            }
+
+        imdb_api_response = requests.request("GET", imdb_api_url, headers=headers)
+
+        imdb_api_json = imdb_api_response.json()
+        rating = imdb_api_json.pop('imDbRating')
+        return rating
+
+
+
 def get_imdb_json(id):
     if (isinstance(id, str)):
         imdb_api_url = "https://imdb-api1.p.rapidapi.com/Title/k_7z9iNr0H/" + id

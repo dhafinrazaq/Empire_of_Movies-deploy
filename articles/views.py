@@ -122,6 +122,29 @@ class MovieDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        current_movie = Movie.objects.get(pk=self.kwargs.get('pk'))
+        reviews = Movie.objects.get(pk=self.kwargs.get('pk')).review.all()
+        sum = 0
+        total = 0
+        reviewer = []
+        for review in reviews:
+            author = review.author
+            if author in reviewer:
+                pass
+            else:
+                current_author_review = Review.objects.filter(author=author).filter(movie=current_movie)
+                current_sum = 0
+                current_total = 0
+                for current in current_author_review:
+                    current_sum += current.rating
+                    current_total += 1
+                sum += current_sum/current_total
+                total += 1
+                reviewer.append(author)
+        if(total==0):
+            context['website_rating'] = "No Review"
+        else:
+            context['website_rating'] = sum/total
         context['is_followed'] = self.request.user in Movie.objects.get(pk=self.kwargs.get('pk')).follower.all()
         context['is_author'] = self.request.user == Movie.objects.get(pk=self.kwargs.get('pk')).author
         return context
