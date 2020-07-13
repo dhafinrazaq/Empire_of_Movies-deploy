@@ -11,9 +11,9 @@
       <!-- Modal body -->
       <div class="modal-body">
         <form class='form', method='post' action="{% url 'new_discussion' %}"> {% csrf_token %}
-          <input name="title" class="form-control mr-sm-2" type="text" placeholder="Title" aria-label="Title">
+          <input name="title" class="form-control mr-sm-2" type="text" placeholder="Title" aria-label="Title" required>
           <br>
-          <textarea name="body" class="form-control mr-sm-2" rows="10" type="text" placeholder="Body" aria-label="Body"></textarea>
+          <textarea name="body" class="form-control mr-sm-2" rows="10" type="text" placeholder="Body" aria-label="Body" required></textarea>
           <br>
           <select name="movie_pk" class="selectpicker" data-live-search="true">
             {% for movie in movie_list_base %}

@@ -1,7 +1,7 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve 
 
-from .views import HomePageView
+from .views import HomePageDiscussion
 # Create your tests here.
 
 class HomePageTests(SimpleTestCase):
@@ -14,7 +14,7 @@ class HomePageTests(SimpleTestCase):
         self.assertEqual(self.response.status_code, 200)
 
     def test_homepage_template(self):
-        self.assertTemplateUsed(self.response, 'home.html')
+        self.assertTemplateUsed(self.response, 'home/home.html')
 
     def test_homepage_contains_correct_html(self):
         self.assertContains(self.response, 'Empire of Movies')
@@ -27,5 +27,5 @@ class HomePageTests(SimpleTestCase):
         view = resolve('/')
         self.assertEqual(
             view.func.__name__,
-            HomePageView.as_view().__name__
+            HomePageDiscussion.as_view().__name__
         )

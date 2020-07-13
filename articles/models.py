@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth import get_user_model
 from notifications.models import Notification
-from api import get_imdb_json
+from api import get_imdb_json, get_imdb_rating
 
 class Movie(models.Model):
     author = models.ForeignKey(
@@ -28,6 +28,7 @@ class Movie(models.Model):
     imDbRating = models.CharField(max_length=255, null=True, blank=True)
     tagline = models.CharField(max_length=255, null=True, blank=True)
     keywords = models.CharField(max_length=255, null=True, blank=True)
+    imDbid = models.CharField(max_length=255, null=True, blank = True)
 
     def __str__(self): 
         return self.title
@@ -46,10 +47,14 @@ class Movie(models.Model):
             releaseDate=json.get('releaseDate'), runtimeStr=json.get('runtimeStr'), directors=json.get('directors'), \
                 writers=json.get('writers'), stars=json.get('stars'), genres=json.get('genres'), \
                     companies=json.get('companies'), countries=json.get('countries'), languages=json.get('languages'), \
-                        imDbRating=json.get('imDbRating'), tagline=json.get('tagline'), keywords=json.get('keywords'))
+                        imDbRating=json.get('imDbRating'), tagline=json.get('tagline'), keywords=json.get('keywords'), imDbid=id)
             return movie
         else:
             return None
+
+    def update(self):
+        imDbid = self.imDbid
+        self.imDbRating = get_imdb_rating(imDbid)
 
 class Discussion(models.Model):
     title = models.CharField(max_length=255)
