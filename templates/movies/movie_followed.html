@@ -14,9 +14,15 @@
       {% if sort_by == "alphabet" %}
       <a class='dropdown-item active'  href="{% url 'movie_followed' %}"> A-Z</a>
       <a class='dropdown-item' href="{% url 'movie_followed_latest' %}"> Latest</a>
+      <a class='dropdown-item' href ="{% url 'movie_followed_rating'%}">Rating</a>
+      {% elif sort_by == "latest" %}
+        <a class='dropdown-item' href="{% url 'movie_list'%}"> A-Z</a>
+        <a class='dropdown-item active'  href="{% url 'movie_followed_latest'  %}"> Latest</a>
+        <a class='dropdown-item' href ="{% url 'movie_followed_rating'%}">Rating</a>
       {% else %}
       <a class='dropdown-item' href="{% url 'movie_followed'%}"> A-Z</a>
-      <a class='dropdown-item active'  href="{% url 'movie_followed_latest'  %}"> Latest</a>
+      <a class='dropdown-item '  href="{% url 'movie_followed_latest'  %}"> Latest</a>
+      <a class='dropdown-item active' href ="{% url 'movie_followed_rating'%}">Rating</a>
       {% endif %}
     </div>
   </div>

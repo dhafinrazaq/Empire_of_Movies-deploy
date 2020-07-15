@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
+{% block title%} New Review {% endblock %}
 {% block content %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb"> 
@@ -11,8 +11,17 @@
   </ol>
 </nav>
     <h1>New Review</h1>
-    <form action="" method="post">{% csrf_token %}
-      {{ form|crispy }}
-      <button class="btn btn-success ml-2" type="submit">Save</button>
+    <form action="" method="post" >{% csrf_token %}
+      <label for="title">Title*</label>
+      <input name="title" class="form-control mr-sm-2" type="text" aria-label="Title" required>
+      <br>
+      <label for="body">Body*</label>
+      <textarea rows="10" name="body" class="form-control mr-sm-2"  type="text"  aria-label="Body" required></textarea>
+      <br>
+      <label for="rating">Rating*</label>
+      <input name="rating" class="form-control mr-sm-2" type="number"  min="1" max="10" aria-label="Rating" required>
+      <br>
+      <button class="btn btn-primary" style="float:right" type="submit" value="Submit">Submit</button>
+      <br>
     </form>
 {% endblock content %}

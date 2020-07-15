@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{% endblock %}
+{% block title %}{{user_view.username}}'s Profile{% endblock %}
 {% block content %}
 <div class="container">
 <h2>{{user_view}}'s Profile</h2>
@@ -10,7 +10,7 @@
   <li class="page-item"><a href="{% url 'profile_comment' user_view.username %}" class="page-link">Comments</a></li>
 </ul> 
 
-<ulclass="list-group">
+<ul class="list-group">
 {% for discussion in discussions %}
 <li class="list-group-item"><a class="text-dark" href="{{ discussion.get_absolute_url }}"><strong>{{discussion.title}}</strong></a> &middot; <a class="text-dark" href="{{ discussion.movie.get_absolute_url }}">{{discussion.movie.title}}</a></li>
 {% endfor %}

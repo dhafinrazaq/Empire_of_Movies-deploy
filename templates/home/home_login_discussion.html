@@ -68,7 +68,7 @@
             <div class="align-self-center">
               <span class="font-weight-bold"> <a href="{{ discussion.get_absolute_url }}">{{ discussion.title }}</a></span> &middot;
               <span><a href="{{discussion.movie.get_absolute_url}}">{{discussion.movie.title}}</a></span> &middot;
-              <span><a href="{{ discussion.author.get_absolute_url }}">{{ discussion.author }}</a> &middot; {{ discussion.date|timesince }}</span>
+              <span><a href="{{ discussion.author.get_absolute_url }}">{{ discussion.author }}</a> &middot; {{ discussion.date|timesince }} ago</span>
             </div>
           </div>
           <div class="col-auto">

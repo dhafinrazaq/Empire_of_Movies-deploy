@@ -55,7 +55,7 @@
             <div class="col row align-items-center ml-1">
               <div class="align-self-center">
                 <span class="font-weight-bold"> <a href="{% url 'review_detail' review.movie.pk review.pk%}">{{ review.title }}</a></span> &middot;
-                <span><a href="{{ review.author.get_absolute_url }}">{{ review.author }}</a> &middot; {{ review.date|timesince }}</span>
+                <span><a href="{{ review.author.get_absolute_url }}">{{ review.author }}</a> &middot; {{ review.date|timesince }} ago</span>
               </div>
             </div>
             <div class="col-auto">
@@ -77,6 +77,7 @@
           </div>
         </div>
       <div class="card-body">
+        <p> <strong>Rating: </strong> {{review.rating}} </p>
         <p>{{ review.body }}</p>
       </div>
     </div>

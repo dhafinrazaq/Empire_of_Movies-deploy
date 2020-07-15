@@ -27,7 +27,7 @@ class SearchResultsListView(TemplateView):
         queryset_user = User.objects.none()
         strGET = str(self.request.GET)
         
-        print('user_search' in strGET)
+        # print('user_search' in strGET)
         if('title' in strGET):
             queryset_movie |= Movie.objects.filter(Q(title__icontains=query))
         if('year' in strGET):
@@ -90,7 +90,7 @@ class MovieRequestListView(LoginRequiredMixin, TemplateView):
             year = ''
         possible_movies = get_possible_movies(title, year)
         context['possible_movies'] = possible_movies
-        print(context['possible_movies'])
+        # print(context['possible_movies'])
         return context
 
     def post(self, request, *args, **kwargs):
@@ -124,27 +124,7 @@ class MovieDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         current_movie = Movie.objects.get(pk=self.kwargs.get('pk'))
         reviews = Movie.objects.get(pk=self.kwargs.get('pk')).review.all()
-        sum = 0
-        total = 0
-        reviewer = []
-        for review in reviews:
-            author = review.author
-            if author in reviewer:
-                pass
-            else:
-                current_author_review = Review.objects.filter(author=author).filter(movie=current_movie)
-                current_sum = 0
-                current_total = 0
-                for current in current_author_review:
-                    current_sum += current.rating
-                    current_total += 1
-                sum += current_sum/current_total
-                total += 1
-                reviewer.append(author)
-        if(total==0):
-            context['website_rating'] = "No Review"
-        else:
-            context['website_rating'] = sum/total
+        # print("=================="+str(current_movie.website_rating))
         context['is_followed'] = self.request.user in Movie.objects.get(pk=self.kwargs.get('pk')).follower.all()
         context['is_author'] = self.request.user == Movie.objects.get(pk=self.kwargs.get('pk')).author
         return context
@@ -177,6 +157,17 @@ class MovieListLatestView(LoginRequiredMixin, ListView):
         context['sort_by'] = 'latest'
         return context
 
+class MovieListRatingView(LoginRequiredMixin, ListView):
+    model = Movie
+    template_name = 'movies/movie_list.html'
+    login_url = 'account_login'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['movie_list'] = Movie.objects.all().order_by('-website_rating')
+        context['sort_by'] = 'website_rating'
+        return context
+
 class MovieFollowedView(LoginRequiredMixin, ListView):
     model = Movie
     template_name = 'movies/movie_followed.html'
@@ -207,6 +198,17 @@ class MovieFollowedLatestView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['movie_followed'] = self.request.user.follows.all().order_by('-releaseDate')
         context['sort_by'] = 'latest'
+        return context
+
+class MovieFollowedRatingView(LoginRequiredMixin, ListView):
+    model = Movie
+    template_name = 'movies/movie_followed.html'
+    login_url = 'account_login'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['movie_followed'] = self.request.user.follows.all().order_by('-website_rating')
+        context['sort_by'] = 'website_rating'
         return context
 
 class MovieEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -297,7 +299,7 @@ class DiscussionCreateView(LoginRequiredMixin, CreateView):
         current_movie = Movie.objects.get(pk=self.kwargs.get('movie_pk'))
         all_followers = current_movie.all_followers()
         title = "New discussion for"
-        print(self.object.get_absolute_url())
+        # print(self.object.get_absolute_url())
         notification = Notification.create(title=title, movie=current_movie, inside=self.object)
         notification.save()
         for follower in all_followers:
@@ -437,17 +439,11 @@ class ReviewDetailView(LoginRequiredMixin, DetailView):
         context['review_pk'] = self.kwargs.get('review_pk')
         return context
 
-class ReviewCreateView(LoginRequiredMixin, CreateView):
+
+class ReviewCreateView(LoginRequiredMixin, TemplateView):
     model = Review
     template_name = 'reviews/review_new.html'
-    fields = ('title', 'body', 'rating',) 
     login_url = 'account_login'
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        form.instance.movie = get_object_or_404(Movie, 
-                                                  id=self.kwargs.get('movie_pk'))
-        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -455,19 +451,44 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         context['movie_pk'] = self.kwargs.get('movie_pk')
         return context
 
-    def get_form(self, form_class=None):
-        form = super(ReviewCreateView, self).get_form(form_class)
-        form.fields['title'].required = True
-        return form
-
     def post(self, request, *args, **kwargs):
         #print(request.POST)
-        super().post(request, *args, **kwargs)
         current_movie = Movie.objects.get(pk=self.kwargs.get('movie_pk'))
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        rating = request.POST.get('rating')
+        author = self.request.user
+        new_review = Review.create(movie=current_movie, title=title, body=body, rating=rating, author=author)
+        new_review.save()
+        reviews = Movie.objects.get(pk=self.kwargs.get('movie_pk')).review.all()
+        sum = 0
+        total = 0
+        reviewer = []
+        for review in reviews:
+            author = review.author
+            if author in reviewer:
+                pass
+            else:
+                current_author_review = Review.objects.filter(author=author).filter(movie=current_movie)
+                current_sum = 0
+                current_total = 0
+                for current in current_author_review:
+                    current_sum += current.rating
+                    current_total += 1
+                sum += current_sum/current_total
+                total += 1
+                reviewer.append(author)
+        if(total==0):
+            current_movie.website_rating = None
+            current_movie.save()
+        else:
+            current_movie.website_rating = round(sum/total, 1)
+            current_movie.save()
+
         all_followers = current_movie.all_followers()
         title = "New review for"
-        print(self.object.get_absolute_url())
-        notification = Notification.create(title=title, movie=current_movie, inside=self.object)
+        # print(new_review.get_absolute_url())
+        notification = Notification.create(title=title, movie=current_movie, inside=new_review)
         notification.save()
         for follower in all_followers:
             if (notification not in follower.notifications.all()):
@@ -475,7 +496,8 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
             if (follower.chat_id):
                 telegram_bot_sendtext(follower.chat_id, "New review for " + notification.movie_title + " with title " + notification.inside_title, "empire-of-movies.herokuapp.com" + notification.inside_link)
         
-        return redirect(self.object)
+        return redirect(new_review)
+
 
 class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Review
@@ -546,7 +568,7 @@ class CommentDetailView(LoginRequiredMixin, DetailView):
         return Comment.objects.get(pk=self.kwargs.get('comment_pk'))
 
     def get_context_data(self, **kwargs):
-        print(self.kwargs)
+        # print(self.kwargs)
         context = super().get_context_data(**kwargs)
         context['movie_name'] = Movie.objects.get(pk=self.kwargs.get('movie_pk')).title
         context['discussion']= Discussion.objects.get(pk=self.kwargs.get('discussion_pk'))

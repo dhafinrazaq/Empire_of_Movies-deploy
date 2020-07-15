@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
+{% block title%} {{review.title}} {% endblock %}
 {% block content %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb"> 
@@ -13,7 +14,7 @@
   
     <h1>Edit Review</h1>
     <form action="" method="post">{% csrf_token %}
-      {{ form.as_p }}
+      {{ form | crispy}}
     <button class="btn btn-info ml-2" type="submit">Update</button>
 </form>
 {% endblock content %}
