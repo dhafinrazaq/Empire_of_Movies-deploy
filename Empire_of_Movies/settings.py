@@ -218,18 +218,30 @@ SOCIALACCOUNT_PROVIDERS['facebook'] = {
         'VERSION': 'v7.0',
     }
 
+ACCOUNT_EMAIL_VERIFICATION ='mandatory'
 
 AUTHENTICATION_BACKENDS = (
 'django.contrib.auth.backends.ModelBackend',
 'allauth.account.auth_backends.AuthenticationBackend', # new
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ACCOUNT_SESSION_REMEMBER = True
 
-DEFAULT_FROM_EMAIL = 'empireofmovies@gmail.com'
+DEFAULT_FROM_EMAIL = 'e0407659@u.nus.edu'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 # comment
 COMMENTS_APP = 'threadedcomments'
 COMMENTS_HIDE_REMOVED = False
+
+
