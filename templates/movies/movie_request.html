@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 
 
-{% block title %}Movies{% endblock title %}
+{% block title %}Request Movie{% endblock title %}
   
 {% block content %}
-<div class="container" >
+
+
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active"> Request Movie </li>
+    <li class="breadcrumb-item active">Request Movie </li>
   </ol>
 </nav>
 <h2>Request Movie</h2>
 
-<form action="" method="post">
+
+
+<form action="" method="post" onsubmit="document.getElementById('toHide').style.display='none'; document.getElementById('toShow').style.display='block'">
 {% csrf_token %}
 <div class="form-group"> 
   <label for="title">Title*</label>
@@ -22,8 +25,15 @@
   <label for="year">Year</label>
   <input class="form-control" type="text" id="year" name="year">
 </div>
-  <input class="btn btn-success" type="submit" value="Submit"/>
+  <button id="toHide" class="btn btn-success" type="submit">
+    Submit
+  </button>
+  <button id="toShow" style="display:none" class="btn btn-success" type="submit" disabled>
+    <span class="spinner-border spinner-border-sm"></span>
+    Loading
+  </button>
+  
 </form> 
 
- </div>
+
 {% endblock content %}

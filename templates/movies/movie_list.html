@@ -13,11 +13,17 @@
     <button type="button" class="btn btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"> Sort by </button>
     <div class = "dropdown-menu">
       {% if sort_by == "alphabet" %}
-      <a class='dropdown-item active'  href="{% url 'movie_list' %}"> A-Z</a>
-      <a class='dropdown-item' href="{% url 'movie_list_latest' %}"> Latest</a>
+        <a class='dropdown-item active'  href="{% url 'movie_list' %}"> A-Z</a>
+        <a class='dropdown-item' href="{% url 'movie_list_latest' %}"> Latest</a>
+        <a class='dropdown-item' href ="{% url 'movie_list_website_rating'%}">Rating</a>
+      {% elif sort_by == "latest" %}
+        <a class='dropdown-item' href="{% url 'movie_list'%}"> A-Z</a>
+        <a class='dropdown-item active'  href="{% url 'movie_list_latest'  %}"> Latest</a>
+        <a class='dropdown-item' href ="{% url 'movie_list_website_rating'%}">Rating</a>
       {% else %}
-      <a class='dropdown-item' href="{% url 'movie_list'%}"> A-Z</a>
-      <a class='dropdown-item active'  href="{% url 'movie_list_latest'  %}"> Latest</a>
+        <a class='dropdown-item' href="{% url 'movie_list'%}"> A-Z</a>
+        <a class='dropdown-item'  href="{% url 'movie_list_latest'  %}"> Latest</a>
+        <a class='dropdown-item active' href ="{% url 'movie_list_website_rating'%}">Rating</a>
       {% endif %}
     </div>
   </div>

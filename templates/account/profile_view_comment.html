@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{% endblock %}
+{% block title %}{{user_view.username}}'s Profile{% endblock %}
 {% block content %}
 <div class="container">
 <h2>{{user_view}}'s Profile</h2>
@@ -14,6 +14,6 @@
 {% for comment in comments %}
 <li class="list-group-item"><a class="text-dark" href="{{ comment.get_absolute_url }}"><strong>{{comment.comment}}</strong></a> &middot; <a class="text-dark" href="{{ comment.get_discussion_url }}">{{comment.get_discussion_title}}</a> &middot; <a class="text-dark" href="{{ comment.get_movie_url }}">{{comment.get_movie_title }}</a></li>
 {% endfor %}
-</ul><s
+</ul>
 </div>
 {% endblock content %}

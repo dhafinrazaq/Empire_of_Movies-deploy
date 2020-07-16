@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load social_share %}
 
-
+{% block title %}{{movie.title}}{%endblock%}
 {% block content %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb"> 
@@ -9,6 +9,31 @@
     <li class="breadcrumb-item active"> {{movie.title}}  </li>
   </ol>
 </nav>
+
+<div class="modal" id="share">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <!-- Modal Header -->
+      <div class="modal-header">
+          <div class="col-12">
+            <h4 class="modal-title text-center">Share</h4>
+          </div>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body text-center">
+        {% post_to_telegram "Check this out!" object post%}
+        {% post_to_facebook object "Facebook"%}
+        {% post_to_twitter "Check {{movie.title}} out!" object "Twitter"%}
+        {% post_to_reddit "Check {{movie.title}} out!" object "Redit" %}
+      </div>
+      <!-- Modal Footer-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="article-entry">
   <div style="overflow:hidden">
     <div style="float:left ">
@@ -39,8 +64,16 @@
       <form class ='form', method='GET' action = "{% url 'review_list' movie.pk %}">
                 <button class='btn btn-primary'>
                 Reviews
-                </button>
+                </button>&ensp;
       </form>
+    </div>
+    <div style="float:left">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#share">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-share-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M12.024 3.797L4.499 7.56l-.448-.895 7.525-3.762.448.894zm-.448 9.3L4.051 9.335 4.5 8.44l7.525 3.763-.448.894z"/>
+          <path fill-rule="evenodd" d="M13.5 5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-11-5.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+        </svg>
+      </button>    
     </div>
   </div>
   <br>
@@ -51,7 +84,11 @@
     </div>
       <div class="col-sm-8" style="float:right">
         <p>{{ object.synopsis }}</p>
-        <p> <strong>Empire of Movies Rating: </strong> {{website_rating}}
+        {% if object.website_rating == 0.0 %}
+        <p> <strong>Empire of Movies Rating: </strong> No Review
+        {% else %}
+        <p> <strong>Empire of Movies Rating: </strong> {{object.website_rating}}
+        {% endif %}
         {% if object.genres%}
           <p> <strong>Genre:</strong> {{object.genres}} </p>
         {%endif%}
@@ -112,6 +149,4 @@
         <p> <strong>Keywords:</strong> {{object.keywords}}</p>
       </div>
 {%endif%}
-  {% post_to_telegram "Check this out!" movie.get_absolute_url post%}
-</div>
 {% endblock content %}

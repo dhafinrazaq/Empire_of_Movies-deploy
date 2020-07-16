@@ -15,7 +15,7 @@
 {% for possible_movie in possible_movies %}
     <form class ='form', method='POST' action = ''> {% csrf_token %}
       <input type='hidden' name ='id' value='{{ possible_movie.0 }}'/>
-      <button class='btn'>
+      <button class='btn btn-light'>
       {% if possible_movie.2 %}
       {{ possible_movie.1|safe }} ({{ possible_movie.2 }})
       {% else %}
