@@ -2,6 +2,9 @@ import requests
 import json
 import ast
 
+omdb_api_key = "49d6a60"
+imdb_api_key = "k_2dInmIXV"
+
 def get_imdb_rating(id):
         imdb_api_url = "https://imdb-api1.p.rapidapi.com/Title/{}/{}".format(imdb_api_key, str(id))
         headers = {
