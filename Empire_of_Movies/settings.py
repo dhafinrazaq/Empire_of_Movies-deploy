@@ -219,6 +219,7 @@ SOCIALACCOUNT_PROVIDERS['facebook'] = {
     }
 
 ACCOUNT_EMAIL_VERIFICATION ='mandatory'
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 
 AUTHENTICATION_BACKENDS = (
 'django.contrib.auth.backends.ModelBackend',
