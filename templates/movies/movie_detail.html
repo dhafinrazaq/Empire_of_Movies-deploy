@@ -6,7 +6,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb"> 
     <li class="breadcrumb-item"><a href = "{%url 'movie_list' %}"> Movies  </a> </li>
-    <li class="breadcrumb-item active"> {{movie.title}}  </li>
+    <li class="breadcrumb-item active"> {{movie.imDbid}}  </li>
   </ol>
 </nav>
 
@@ -41,7 +41,7 @@
     </div>
     <div style="float:left">
       <form class ='form', method='POST' action = '{% url "follow" %}'> {% csrf_token %}
-                <input type='hidden' name ='title' value='{{movie.title}}'/>
+                <input type='hidden' name ='title' value='{{movie.imDbid}}'/>
                 {% if is_followed %} 
                 <button class='btn btn-danger'>
                 Unfollow

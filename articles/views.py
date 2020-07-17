@@ -106,7 +106,7 @@ class FollowMovieView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         #print(request.POST)
         MovietoFollow = request.POST.get("title")
-        obj = Movie.objects.get(title=MovietoFollow)
+        obj = Movie.objects.get(imDbid=MovietoFollow)
         user = self.request.user
         if user in obj.follower.all():
             obj.follower.remove(user)

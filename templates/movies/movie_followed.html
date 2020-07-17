@@ -34,7 +34,7 @@
         <div class="font-weight-bold text-black-50" style="float:left; vertical-align:middle"><h4><span style="vertical-align:middle">({{ movie.year }}) &nbsp;</span></h4></div>
         <div style="float:left">
           <form class ='form', method='POST' action = '{% url "follow" %}'> {% csrf_token %}
-                    <input type='hidden' name ='title' value='{{movie.title}}'/>
+                    <input type='hidden' name ='title' value='{{movie.imDbid}}'/>
                     {% if user in movie.all_followers %}
                     <button class='btn btn-danger'>
                     Unfollow
