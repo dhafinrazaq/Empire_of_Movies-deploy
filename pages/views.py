@@ -54,3 +54,6 @@ class PrivacyPolicyView(TemplateView):
 
 class  UserGuideView(TemplateView):
     template_name = 'user_guide.html'
+
+class AboutUsView(TemplateView):
+    template_name = 'about_us.html'
