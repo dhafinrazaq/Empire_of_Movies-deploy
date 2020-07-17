@@ -96,9 +96,9 @@ class MovieRequestListView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         id = request.POST.get('id')
         movie = Movie.create(id)
-        if (Movie.objects.filter(title=movie.title).all().count() == 0):
+        if (Movie.objects.filter(imDbid=movie.imDbid).all().count() == 0):
             movie.save()
-        return redirect(Movie.objects.get(title=movie.title))
+        return redirect(Movie.objects.get(imDbid=movie.imDbid))
         
         
 

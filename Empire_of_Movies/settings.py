@@ -98,24 +98,24 @@ DATABASES = {
     #     'PORT': '5432',
     # }
 
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'empire2',
-        'USER': 'postgres',
-        'PASSWORD': 'gilbert19',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-    
-
-    # 'default': {
+    #     'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'empire_of_movies',
-    #     'USER': 'dhafinrazaq',
-    #     'PASSWORD': '123',
+    #     'NAME': 'empire2',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'gilbert19',
     #     'HOST': '127.0.0.1',
     #     'PORT': '5432',
     # }
+    
+
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'empire_of_movies',
+        'USER': 'dhafinrazaq',
+        'PASSWORD': '123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
 
 }
 db_from_env = dj_database_url.config(conn_max_age=600)
@@ -219,6 +219,9 @@ SOCIALACCOUNT_PROVIDERS['facebook'] = {
     }
 
 ACCOUNT_EMAIL_VERIFICATION ='mandatory'
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_EMAIL_REQUIRED = False
 
 AUTHENTICATION_BACKENDS = (
 'django.contrib.auth.backends.ModelBackend',
