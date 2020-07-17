@@ -123,14 +123,17 @@
 
         /* END COMMENTS */
         .footers {
+          position: fixed;
           padding-top:1em;
-          padding-bottom:2em;
+          padding-bottom:1em;
           left: 0;
           bottom: 0;
           width: 100%;
-          background-color: white;
-          color: dark;
+          background-color: #343a40;
+          text-color: #343a40;
           text-align: center;
+          border-style: solid;
+          border-top-color: #343a40;
         }
 
   </style>
@@ -142,8 +145,8 @@
 <body>
 {% include "home/new_review_modal.html"%}
 {% include "home/new_discussion_modal.html"%}
-
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+<div class="container" style="padding-bottom:1em">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
   <a class="navbar-brand" href="{% url 'home' %}">Empire of Movies</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -258,32 +261,54 @@
 </nav>
 <br>
       
-    <div class="container">
+    <div class="container" style="padding-top:3em; padding-bottom:4em">
       {% block content %}
       {% endblock content %}
     </div>
 
-<div class="container" style="padding-top:1em">
-<hr>
-    <footer class="footers">
-        <span ><a class = "text-dark" href="{% url 'user_guide'%}"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-          <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-          <circle cx="8" cy="4.5" r="1"/>
-          </svg> User Guide</a>
-        </span> &ensp;&middot; &ensp;
-        <span><a class="text-dark" href="{% url 'about_us'%}">About us</a></span>&ensp; &middot;&ensp;
-        <span class="text-dark">
-        <a class="text-dark" href="mailto:EmpireOfMovies123@gmail.com">
-          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
-          </svg> EmpireOfMovies123@gmail.com</a>
-        </span>&ensp;&middot;&ensp;
-<span> <a class="text-dark" href="{% url 'privacy_policy'%}">Privacy Policy</a> </span> &middot;&ensp;
-<span> <a class="text-dark" href="https://github.com/dhafinrazaq/Empire_of_Movies-deploy">GitHub Repository</a> </span>
 
-    </footer>
-    </div>
+<div class="container" >
+
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
+
+{% comment %} <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleFooter">
+    <span class="navbar-toggler-icon"></span>
+  </button> {% endcomment %}
+  {% comment %} <div class="collapse navbar-collapse" id="collapsibleFooter"> {% endcomment %}
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item">
+          <a class = "nav-link" href="{% url 'user_guide'%}">
+          {% comment %} <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+            <circle cx="8" cy="4.5" r="1"/>
+            </svg>  {% endcomment %}
+            User Guide
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class = "nav-link" href="{% url 'about_us'%}"> 
+  About Us </a>
+      </li>
+      {% comment %} <li class="nav-item">
+        <a class="nav-link" href="mailto:EmpireOfMovies123@gmail.com"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+            </svg> EmpireOfMovies123@gmail.com </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'privacy_policy'%}">Privacy Policy</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/dhafinrazaq/Empire_of_Movies-deploy">GitHub Repository</a>
+      </li> {% endcomment %}
+      
+    </ul>
+  {% comment %} </div> {% endcomment %}
+</nav>
+</div>
+
+</div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   

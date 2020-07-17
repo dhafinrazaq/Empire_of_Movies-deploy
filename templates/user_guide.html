@@ -2,108 +2,264 @@
 {% load static %}
 {% block title %}User Guide{% endblock title %}
 {% block content %}
-<h2><span style="font-weight: 400;">Sign Up</span></h2>
-<img src="{% static "SignUp.png" %}" width="75%" alt="Sign Up ">
-<hr>
-<h2><span style="font-weight: 400;">Login</span></h2>
-<img src="{% static "Login.png" %}" width="75%" alt="Log In ">
-<hr>
-<h2><span style="font-weight: 400;">Request movie</span></h2>
-<ul>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Enter the movie title and year (optional) if the movie isn&rsquo;t available on the website yet</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Click on Submit</span></li>
-</ul>
-<img src="{% static "Request.png" %}" width="75%" alt="Request ">
-<ul>
-<li style="font-weight: 400;"><span style="font-weight: 400;">The list of possible movies will appear</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Click on the movie you want to be added</span></li>
-</ul>
-<img src="{% static "RequestList.png" %}" width="75%" alt="Request List ">
-<ul>
-<li style="font-weight: 400;"><span style="font-weight: 400;">It will be available on the website (with information about the movie), and you can follow, create a discussion thread, or post&nbsp; a review</span></li>
-</ul>
-<img src="{% static "RequestResult.png" %}" width="75%" alt="Request Result ">
-<hr>
-<h2><span style="font-weight: 400;">Follow movie</span></h2>
-<ol>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Click on the follow button to follow a movie</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">It will appear on the &ldquo;Followed&rdquo; page</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">You will be notified when a new discussion thread or review is posted</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Click on the Unfollow button to unfollow a movie</span></li>
-</ol>
-<img src="{% static "Follow.png" %}" width="75%" alt="Sign Up ">
-<hr>
-<h2><span style="font-weight: 400;">List of available movies</span></h2>
-<img src="{% static "ListOfAvailableMovies.png" %}" width="75%" alt="Available Movies ">
-<hr>
-<h2><span style="font-weight: 400;">List of followed movies</span></h2>
-<img src="{% static "ListOfFollowedMovies.png" %}" width="75%" alt="Followed Movies ">
-<hr>
-<h2><span style="font-weight: 400;">Connect to Telegram&nbsp;</span></h2>
-<p><span style="font-weight: 400;">Connect to Telegram to be notified via a telegram bot when a new discussion thread or review of a movie you follow is posted</span></p>
-<ol>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Follow the instruction on the web</span></li>
-</ol>
-<img src="{% static "Connect.png" %}" width="75%" alt="Connect to Telegram ">
-<hr>
-<h2><span style="font-weight: 400;">Discussion</span></h2>
-<p><span style="font-weight: 400;">Discussion page to discuss about the film</span></p>
-<ol>
-<li style="font-weight: 400;"><span style="font-weight: 400;">To create a new discussion, you can either:</span>
-<ul>
-    <li style="font-weight: 400;"><span style="font-weight: 400;">Click on the <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-            </svg> on the navbar, and click on "New Discussion" or</span></li>
-    <li style="font-weight: 400;"><span style="font-weight: 400;">Go to a movie page and click on "Discussion", and then click on the &ldquo;New discussion&rdquo; button to create a discussion thread. You can edit or delete the discussion you created later</span></li>
-</ul></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">You can upvote or downvote a discussion thread if you find it interesting to make it appear on top of the page if you sort it by &ldquo;Top&rdquo;</span></li>
-</ol>
-<img src="{% static "Discussion.png" %}" width="75%" alt="Discussion">
-<hr>
-<h2><span style="font-weight: 400;">Report &amp; Comment</span></h2>
-<ol>
-<li style="font-weight: 400;"><span style="font-weight: 400;">If you find that a particular discussion is a spam or inappropriate, please report it by pressing the &ldquo;Report&rdquo; button, and a prompt will appear for you to state the reason</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">You will be able to interact with other users via the comment section on the discussion thread</span></li>
-</ol>
-<img src="{% static "Report.png" %}" width="75%" alt="Report and Comment">
-<hr>
-<h2><span style="font-weight: 400;">Review</span></h2>
-<p><span style="font-weight: 400;">You can give a review about a film</span></p>
-<ol>
-<li style="font-weight: 400;"><span style="font-weight: 400;">You can see all reviews about the film or create a new one</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">To create a new review, you can either:</span>
-<ul>
-    <li style="font-weight: 400;"><span style="font-weight: 400;">Click on the <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-            </svg> on the navbar, and click on "New Review" or</span></li>
-    <li style="font-weight: 400;"><span style="font-weight: 400;">Go to a movie page and click on "Review", and then click on the &ldquo;New discussion&rdquo; button to create a discussion thread. You can edit or delete the discussion you created later</span></li>
-</ul></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">You can fill in your review</span></li>
-</ol>
-<img src="{% static "Review.png" %}" width="75%" alt="Review">
-<img src="{% static "ReviewDetail.png" %}" width="75%" alt="Review Detail ">
-<hr>
-<h2><span style="font-weight: 400;">Web notification</span></h2>
-<ol>
-<li style="font-weight: 400;"><span style="font-weight: 400;">If there is new notification, the notification button will turn red and if you clear all of the notifications, it will be white-colored</span></li>
-</ol>
-<img src="{% static "WebNotif.png" %}" width="75%" alt="Website Notification ">
-<hr>
-<h2><span style="font-weight: 400;">Telegram notification</span></h2>
-<p><span style="font-weight: 400;">You must have previously followed the instruction on the &ldquo;Connect to Telegram&rdquo; page</span></p>
-<p><span style="font-weight: 400;">If a movie you followed has a new discussion or review, you will be notified via a telegram bot</span></p>
-<p>&nbsp;</p>
-<img src="{% static "TelegramNotif.png" %}" width="75%" alt="Telegram Notification ">
-<hr>
-<h2><span style="font-weight: 400;">Search Bar and Result</span></h2>
-<ol>
-<li style="font-weight: 400;"><span style="font-weight: 400;">You can use the search bar with &ldquo;Filter by&rdquo; feature</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Here is an example of a search query with filter</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">The search result will appear</span></li>
-</ol>
-<img src="{% static "Search.png" %}" width="75%" alt="Search">
-<img src="{% static "SearchResult.png" %}" width="75%" alt="Search Result">
-<p><br /><br /></p>
+<h2>User Guide</h2>
+  <div id="accordion">
+    <div class="card">
+      <div class="card-header">
+        <a class="card-link" data-toggle="collapse" href="#collapseOne">
+          Sign Up
+        </a>
+      </div>
+      <div id="collapseOne" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+         <ol>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">To sign up, fill in the form or log in with your Google or Facebook account</span></li>
+        </ol>
+        <img src="{% static "SignUp.jpg" %}" width="75%" alt="Sign Up ">
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+        Login
+      </a>
+      </div>
+      <div id="collapseTwo" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <ol>
+            <li style="font-weight: 400;"><span style="font-weight: 400;">To log in, fill in the form or log in with your Google or Facebook account</span></li>
+          </ol>
+          <img src="{% static "Login.jpg" %}" width="75%" alt="Log In ">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+          Request Movie
+        </a>
+      </div>
+      <div id="collapseThree" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <ol>
+            <li style="font-weight: 400;"><span style="font-weight: 400;">Enter the movie title and year (optional) if the movie isn&rsquo;t available on the website yet</span></li>
+            <li style="font-weight: 400;"><span style="font-weight: 400;">Click on Submit</span></li>
+          <img src="{% static "Request.jpg" %}" width="75%" alt="Request ">
+            <li style="font-weight: 400;"><span style="font-weight: 400;">The list of possible movies will appear</span></li>
+            <li style="font-weight: 400;"><span style="font-weight: 400;">Click on the movie you want to be added</span></li>
+          <img src="{% static "RequestList.jpg" %}" width="75%" alt="Request List ">
+            <li style="font-weight: 400;"><span style="font-weight: 400;">It will be available on the website (with information about the movie), and you can follow, create a discussion thread, or post&nbsp; a review</span></li>
+          </ol>
+          <img src="{% static "RequestResult.jpg" %}" width="75%" alt="Request Result ">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapse5">
+        All Movies
+      </a>
+      </div>
+      <div id="collapse5" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <ol>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">This will display the list of available movies</span></li>
+          </ol>
+          <img src="{% static "ListOfAvailableMovies.jpg" %}" width="75%" alt="Available Movies ">
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapse4">
+        Follow/Unfollow Movie
+      </a>
+      </div>
+      <div id="collapse4" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <ol>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">Click on the follow button to follow a movie</span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">It will appear on the &ldquo;Followed&rdquo; page</span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">You will be notified when a new discussion thread or review is posted</span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">Click on the Unfollow button to unfollow a movie</span></li>
+          </ol>
+          <img src="{% static "Follow.jpg" %}" width="75%" alt="Sign Up ">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapse6">
+        Followed Movies
+      </a>
+      </div>
+      <div id="collapse6" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <ol>
+          <li><span style="font-weight: 400;">This will display the list of movies you followed</span></li>
+          </ol>
+          <img src="{% static "ListOfFollowedMovies.jpg" %}" width="75%" alt="Followed Movies ">
+        </div>
+      </div>
+    </div>
+
+        <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapse7">
+        Connect to Telegram
+      </a>
+      </div>
+      <div id="collapse7" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <p><span style="font-weight: 400;">Connect to Telegram to be notified via a telegram bot when a new discussion thread or review of a movie you follow is posted</span></p>
+          <ol>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">Follow the instruction on the page</span></li>
+          </ol>
+          <img src="{% static "Connect.jpg" %}" width="75%" alt="Connect to Telegram ">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapse8">
+        Discussion
+      </a>
+      </div>
+      <div id="collapse8" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <p><span style="font-weight: 400;">Discussion page to discuss about the film</span></p>
+          <ol>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">To create a new discussion, you can either:</span>
+          <ul>
+              <li style="font-weight: 400;"><span style="font-weight: 400;"><span class="text-danger">Option 1</span>: Go to a movie page and click on "Discussion", and then click on the &ldquo;New discussion&rdquo; button to create a discussion thread, or</span></li>
+              <li style="font-weight: 400;"><span style="font-weight: 400;"><span class="text-danger">Option 2</span>: Click on the <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                      </svg> on the navbar, and click on "New Discussion"</span></li>
+              
+          </ul></li>
+          <li style="font-weight: 400;">You can edit or delete the discussion you created later</li>
+
+          </ol>
+          <img src="{% static "Discussion.jpg" %}" width="75%" alt="Discussion">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapse9">
+        Discussion: Report, Comment, and Upvote/Downvote
+      </a>
+      </div>
+      <div id="collapse9" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <ol>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">Open a discussion detail page</span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">If you find that a particular discussion is a spam or inappropriate, please report it by pressing the button indicated by <span class="text-danger">(1)</span> and click the &ldquo;Report&rdquo; button <span class="text-danger">(2)</span>, and a prompt will appear for you to state the reason</span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">You will be able to interact with other users via the comment section on the discussion thread by typing it on <span class="text-danger">(3)</span> and submit it</span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">You can upvote or downvote a discussion thread <span class="text-danger">(4)</span> if you find it interesting to make it appear on top of the page if you sort it by &ldquo;Top&rdquo;</span></li>
+          </ol>
+          <img src="{% static "Report.jpg" %}" width="75%" alt="Report and Comment">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapse10">
+        Review
+      </a>
+      </div>
+      <div id="collapse10" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <p><span style="font-weight: 400;">You can give a review about a film</span></p>
+          <ol>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">To create a new review, you can either:</span>
+          <ul>
+              <li style="font-weight: 400;"><span style="font-weight: 400;"><span class="text-danger">Option 1</span>: Go to a movie page and click on "Review", and then click on the &ldquo;New Review&rdquo; button to create a review, or</span></li>
+              <li style="font-weight: 400;"><span style="font-weight: 400;"><span class="text-danger">Option 2</span>: Click on the <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                      </svg> on the navbar, and click on "New Review"</span></li>
+              
+          </ul></li>
+          <li style="font-weight: 400;">You can edit or delete the review you created later</li>
+
+
+          <img src="{% static "Review.jpg" %}" width="75%" alt="Review">
+          <li style="font-weight: 400;"><span style="font-weight: 400;">If you find that a particular review is a spam or inappropriate, please report it by pressing the button indicated by <span class="text-danger">(1)</span> and click the &ldquo;Report&rdquo; button <span class="text-danger">(2)</span>, and a prompt will appear for you to state the reason</span></li>
+          </ol>
+          <img src="{% static "ReviewDetail.jpg" %}" width="75%" alt="Review Detail ">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapse11">
+        Web Notification
+      </a>
+      </div>
+      <div id="collapse11" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <ol>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">If there is a notification, the notification button <span class="text-danger">(1)</span> will turn red</span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">To open the notifications list, click on the notification icon <span class="text-danger">(1)</span></span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">To clear a notification, click on <span class="text-danger">(3)</span></span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">To clear all notifications, click on <span class="text-danger">(2)</span></span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">If there is no notification, the notification button <span class="text-danger">(1)</span> will turn white</span></li>
+          </ol>
+          <img src="{% static "WebNotif.jpg" %}" width="75%" alt="Website Notification ">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapse12">
+        Telegram Notification
+      </a>
+      </div>
+      <div id="collapse12" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <ol>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">You must have previously followed the instruction on the &ldquo;Connect to Telegram&rdquo; page (have sent the command similar to what is indicated by <span class="text-danger">(1)</span>. However, please follow the instruction from the page as the command may differ</span>)</span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">If a movie you followed has a new discussion or review, you will be notified via our Telegram bot as indicated by <span class="text-danger">(2)</span></span></li>
+          </ol>
+          <img src="{% static "TelegramNotif.jpg" %}" width="75%" alt="Telegram Notification ">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapse0">
+        Search Bar and Result
+      </a>
+      </div>
+      <div id="collapse0" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <ol>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">You can use the search bar with &ldquo;filter by&rdquo; feature</span></li>
+          <li style="font-weight: 400;"><span style="font-weight: 400;">Choose the filters <span class="text-danger">(filter by)</span>, enter the <span class="text-danger">search query</span>, and hit Enter on your keyboard</span></li>
+          <img src="{% static "Search.jpg" %}" width="75%" alt="Search">
+          <li style="font-weight: 400;"><span style="font-weight: 400;">The search result will appear</span></li>
+          </ol>
+
+          <img src="{% static "SearchResult.jpg" %}" width="75%" alt="Search Result">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 {% endblock content %}
