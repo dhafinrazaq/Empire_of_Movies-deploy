@@ -56,7 +56,7 @@ class ProfileDiscussionView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         User = get_user_model()
         context['user_view'] = User.objects.get(username=self.kwargs.get('username'))
-        context['discussions'] = Discussion.objects.filter(author=context['user_view'])
+        context['discussions'] = Discussion.objects.filter(author=context['user_view']).order_by("-date")
         return context
 
 class ProfileReviewView(LoginRequiredMixin, TemplateView):
@@ -67,7 +67,7 @@ class ProfileReviewView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         User = get_user_model()
         context['user_view'] = User.objects.get(username=self.kwargs.get('username'))
-        context['reviews'] = Review.objects.filter(author=context['user_view'])
+        context['reviews'] = Review.objects.filter(author=context['user_view']).order_by("-date")
         return context
 
 class ProfileCommentView(LoginRequiredMixin, TemplateView):
@@ -78,7 +78,7 @@ class ProfileCommentView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         User = get_user_model()
         context['user_view'] = User.objects.get(username=self.kwargs.get('username'))
-        context['comments'] = ThreadedComment.objects.filter(user_name=context['user_view'].username).filter(is_removed=False)
+        context['comments'] = ThreadedComment.objects.filter(user_name=context['user_view'].username).filter(is_removed=False).order_by("-submit_date")
         return context
 
 class TelegramDisconnectView(LoginRequiredMixin, View):
