@@ -7,10 +7,13 @@ django.setup()
 from users.models import CustomUser
 import hashlib
 
+from django.conf import settings
+apiKey = settings.TELEGRAM_API_KEY
+
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
 
-updater = Updater(token='923537632:AAEIynJFgLCT25cbuwiuKlNPyk651kxS-LM', use_context=True)
+updater = Updater(token=apiKey, use_context=True)
 dispatcher = updater.dispatcher
 
 def start(update, context):
@@ -63,7 +66,7 @@ import requests
 
 def telegram_bot_sendtext(chat_id, bot_message, link):
 
-    bot_token = '923537632:AAEIynJFgLCT25cbuwiuKlNPyk651kxS-LM'
+    bot_token = apiKey
     bot_chatID = chat_id
     send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message + ' ' + link
 

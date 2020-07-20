@@ -1,9 +1,10 @@
 import requests
 import json
 import ast
+from django.conf import settings
 
-omdb_api_key = "49d6a60"
-imdb_api_key = "k_2dInmIXV"
+omdb_api_key = settings.OMDB_API_KEY
+imdb_api_key = settings.IMDB_API_KEY
 
 def get_imdb_rating(id):
         imdb_api_url = "https://imdb-api1.p.rapidapi.com/Title/{}/{}".format(imdb_api_key, str(id))

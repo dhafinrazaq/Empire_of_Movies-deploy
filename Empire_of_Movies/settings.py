@@ -4,12 +4,15 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+from dotenv import load_dotenv
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%-#u&bhr_31k901s6vf6ktiax9x!_(efmh6-n*!5w6joqgz#fa'
+SECRET_KEY = os.getenv('SECRET_KEY', 'Token Not found')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -89,30 +92,11 @@ WSGI_APPLICATION = 'Empire_of_Movies.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'd1ivjqpgpjngmn',
-    #     'USER': 'dirhxrxonskcrc',
-    #     'PASSWORD': 'd7033cbd8d273e1fae89037217a9a6038d25d8d40eacdd639cce078aa12645b9',
-    #     'HOST': 'ec2-34-195-169-25.compute-1.amazonaws.com',
-    #     'PORT': '5432',
-    # }
-
-    #     'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'empire2',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'gilbert19',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '5432',
-    # }
-    
-
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'empire_of_movies',
-        'USER': 'dhafinrazaq',
-        'PASSWORD': '123',
+        'NAME': os.getenv('DATABASE_NAME', 'Token Not found'),
+        'USER': os.getenv('DATABASE_USER', 'Token Not found'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'Token Not found'),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -121,7 +105,6 @@ DATABASES = {
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
-#  PGUSER=dhafinrazaq PGPASSWORD=123  heroku pg:push postgres://127.0.0.1/empire_of_movies postgresql-perpendicular-60239
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -235,10 +218,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ACCOUNT_SESSION_REMEMBER = True
 
-DEFAULT_FROM_EMAIL = 'e0407659@u.nus.edu'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER', 'Token Not found')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'Token Not found')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'Token Not found')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -247,4 +230,9 @@ EMAIL_USE_TLS = True
 COMMENTS_APP = 'threadedcomments'
 COMMENTS_HIDE_REMOVED = False
 
+# telegram bot
+TELEGRAM_API_KEY = os.getenv('TELEGRAM_API_KEY', 'Token Not found')
 
+# omdb and imdb api
+OMDB_API_KEY = os.getenv('OMDB_API_KEY', 'Token Not found')
+IMDB_API_KEY = os.getenv('IMDB_API_KEY', 'Token Not found')
