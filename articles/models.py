@@ -56,6 +56,7 @@ class Movie(models.Model):
     def update(self):
         imDbid = self.imDbid
         self.imDbRating = get_imdb_rating(imDbid)
+        self.save()
 
 class Discussion(models.Model):
     title = models.CharField(max_length=255)

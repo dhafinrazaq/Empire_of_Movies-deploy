@@ -1,10 +1,10 @@
-from django.test import SimpleTestCase
+from django.test import TestCase
 from django.urls import reverse, resolve 
 
 from .views import HomePageDiscussion
 # Create your tests here.
 
-class HomePageTests(SimpleTestCase):
+class HomePageTests(TestCase):
 
     def setUp(self):
         url = reverse('home')

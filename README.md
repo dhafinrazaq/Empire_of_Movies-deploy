@@ -4,6 +4,11 @@ Empire of Movies is a movie forum website in which you can discuss and give your
 
 You can visit our website [here](https://empire-of-movies.herokuapp.com/)
 
+## Additional Features:
+- Notifications via website, email, and Telegram
+- Movie database automatically generated on request
+- Uses threaded comment to improve user experience on discussing the movies
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 Please make sure to update tests accordingly.

@@ -135,37 +135,3 @@ class DiscussionTests(TestCase):
         self.assertContains(response, 'Discussion title')
         self.assertContains(response, 'Body of discussion')
         self.assertTemplateUsed(response, 'discussions/discussion_detail.html')
-
-class CommentTests(TestCase):
-
-    def setUp(self):
-        self.user = get_user_model().objects.create_user(
-            username='user',
-            email='user@email.com',
-            password='testpass123'
-        )
-        self.movie = Movie.objects.create(
-            title='Harry Potter',
-            synopsis='Once upon a time',
-            year='2002'
-        )
-        self.discussion = Discussion.objects.create(
-            title='Discussion title',
-            body='Body of discussion',
-            movie=self.movie,
-            author=self.user,
-        )
-        self.comment = Comment.objects.create(
-            title='Comment title',
-            discussion=self.discussion,
-            author=self.user,
-        )
-
-    def test_comment_detail_view(self):
-        self.client.login(username='user', password='testpass123')
-        response = self.client.get(self.comment.get_absolute_url())
-        no_response = self.client.get('movies/12345/discussion/123/comment/1234')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(no_response.status_code, 404)
-        self.assertContains(response, 'Comment title')
-        self.assertTemplateUsed(response, 'comment/comment_detail.html')

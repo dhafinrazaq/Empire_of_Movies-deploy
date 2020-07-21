@@ -37,7 +37,6 @@ def flag(request, comment_id, next=None):
 
 
 @csrf_protect
-@permission_required("django_comments.can_moderate")
 def delete(request, comment_id, next=None):
     """
     Deletes a comment. Confirmation on GET, action on POST. Requires the "can
