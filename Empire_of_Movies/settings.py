@@ -201,29 +201,29 @@ SOCIALACCOUNT_PROVIDERS['facebook'] = {
         'VERSION': 'v7.0',
     }
 
-ACCOUNT_EMAIL_VERIFICATION ='mandatory'
+ACCOUNT_EMAIL_VERIFICATION ='none'
 SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_EMAIL_REQUIRED = False
 
 AUTHENTICATION_BACKENDS = (
 'django.contrib.auth.backends.ModelBackend',
-'allauth.account.auth_backends.AuthenticationBackend', # new
+# 'allauth.account.auth_backends.AuthenticationBackend', # new
 )
 
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-ACCOUNT_SESSION_REMEMBER = True
+# ACCOUNT_SESSION_REMEMBER = True
 
-DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER', 'Token Not found')
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'Token Not found')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'Token Not found')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER', 'Token Not found')
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'Token Not found')
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'Token Not found')
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
 
 
 # comment
